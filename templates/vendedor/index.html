@@ -1,0 +1,35 @@
+<div layout="column" flex ng-controller="VendedorIndexCtrl">
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-primary">
+            <div class="md-toolbar-tools" md->
+                <span>Vendedores</span>
+                <div flex></div>
+                <md-button  class="md-primary" ng-click="showAdd($event)">Nuevo Vendedor </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">
+                <thead md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column md-order-by="nombres"><span>Nombres</span></th>
+                    <th md-column md-order-by="type"><span>Apellidos</span></th>
+                    <th md-column md-numeric md-order-by="calories.value" md-desc><span>Cedula</span></th>
+                    <th md-column md-numeric md-order-by="fat.value"><span>Telefono</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="vendedor" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat=" vende in vendedor | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ vende.nombres }}</td>
+                    <td md-cell>{{ vende.apellidos }}</td>
+                    <td md-cell>{{ vende.cedula }}</td>
+                    <td md-cell>{{ vende.telefono  }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{ vendedor.length }}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+    </md-card>
+    </md-content>
+</div>

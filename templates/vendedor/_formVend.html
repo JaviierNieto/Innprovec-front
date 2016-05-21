@@ -1,0 +1,25 @@
+<md-dialog aria-label="Form">
+    <md-content class="md-padding">
+        <form name="userForm">
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>Nombres</label> <input ng-model="vendedor.nombres">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Apellidos</label> <input ng-model="vendedor.apellidos">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Cedula</label> <input ng-model="vendedor.cedula">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Telefono</label> <input ng-model="vendedor.telefono">
+                </md-input-container>
+            </div>
+        </form>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button ng-click="answer('not useful')"> Cancel </md-button>
+        <md-button ng-click="answer('useful')" class="md-primary"> Save </md-button>
+    </div>
+</md-dialog>

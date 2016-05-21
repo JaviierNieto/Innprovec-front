@@ -1,0 +1,73 @@
+.login-form{
+    text-align: center;
+    padding-top: 100px;
+}
+.text-fields {
+    width: 70%;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.form-buttons {
+    width: 70%;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+.toolbar .identification {
+    margin-right: 40px;
+    text-align: right;
+}
+
+.toolbar .identification .name {
+    font-size: 14px;
+    margin-right: 3px;
+}
+
+.toolbar .identification .role {
+    font-size: 11px;
+}
+.toolbar .identification .role .security {
+    font-size: 17px;
+}
+.toolbar .side-menu {
+    margin-top: 15px;
+    padding: 0;
+}
+
+.toolbar .side-menu .fa {
+    width: 20px;
+}
+
+.toolbar .menu-item {
+    color: #666;
+    font-size: 17px;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 15px 15px 15px 30px;
+}
+
+.toolbar .menu-item:focus {
+    outline: none;
+    border: 0;
+}
+
+.toolbar .menu-item:hover {
+    background: #f6f6f6;
+}
+
+.toolbar .menu-item.selected {
+    background: #ddd;
+}
+
+.toolbar .menu-item .icon-all-requests {
+    font-size: 23px;
+    margin-right: 20px;
+}
+
+.toolbar .menu-item.separator {
+    border-top: solid 1px #eee;
+    border-bottom: solid 1px #eee;
+}
+
+/* tabla */
+
