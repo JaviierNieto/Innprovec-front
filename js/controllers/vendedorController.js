@@ -4,7 +4,7 @@ app.controller('VendedorIndexCtrl', function ($mdEditDialog, $q, $scope, listaVe
 
     $scope.query = {
         order: 'name',
-        limit: 5,
+        limit: 8,
         page: 1
     };
 
@@ -12,18 +12,13 @@ app.controller('VendedorIndexCtrl', function ($mdEditDialog, $q, $scope, listaVe
 
     $scope.showAdd = function(ev) {
         $mdDialog.show({
-                controller: DialogController,
-                templateUrl: "templates/Vendedor/_formVend.html",
-                targetEvent: ev
-            })
-            .then(function(answer) {
-                alert('You said the information was "' + answer + '".');
-            }, function() {
-                alert('You cancelled the dialog.');
-            });
+            controller: DialogController,
+            templateUrl: "templates/Vendedor/_formVend.html",
+            targetEvent: ev
+        });
     };
 
-    function DialogController($scope, $mdDialog) {
+    var DialogController = function ($scope, $mdDialog) {
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -32,14 +27,13 @@ app.controller('VendedorIndexCtrl', function ($mdEditDialog, $q, $scope, listaVe
         };
         $scope.answer = function(answer) {
             listaVendedor.save($scope.vendedor,function (data) {
-                $scope.vendedor = {}
+                $scope.vendedor = {};
+                console.log(data)
             },function (err) {
-                alert("ojo la estas cagando")
+                alert(err)
             });
             $mdDialog.hide(answer);
         };
-    }
+    };
 });
-
-
 
