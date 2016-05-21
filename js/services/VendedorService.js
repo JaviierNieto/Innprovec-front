@@ -1,13 +1,12 @@
-
 var app = angular.module("inprovec");
 
 app.factory('listaVendedor',listaVendedor);
 
-listaVendedor.$inject =['$resource'];
+listaVendedor.$inject =['$resource', '$rootScope'];
 
-function listaVendedor($resource) {
+function listaVendedor($resource, $rootScope) {
 
-    return $resource('http://api-ing.herokuapp.com/vendedores/:id',{},{
+    return $resource($rootScope.ruta + '/vendedores/:id',{},{
         'update':{
             method: 'PATCH'
         }

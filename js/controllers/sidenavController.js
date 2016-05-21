@@ -6,10 +6,7 @@ app.controller('sidenavCtrl', function ($scope, $timeout, $mdSidenav, $log) {
         $scope.isOpenRight = function(){
             return $mdSidenav('right').isOpen();
         };
-        /**
-         * Supplies a function that will continue to operate until the
-         * time is up.
-         */
+
         function debounce(func, wait, context) {
             var timer;
             return function debounced() {
@@ -22,10 +19,7 @@ app.controller('sidenavCtrl', function ($scope, $timeout, $mdSidenav, $log) {
                 }, wait || 10);
             };
         }
-        /**
-         * Build handler to open/close a SideNav; when animation finishes
-         * report completion in console
-         */
+
         function buildDelayedToggler(navID) {
             return debounce(function() {
                 $mdSidenav(navID)
