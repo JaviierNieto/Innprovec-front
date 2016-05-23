@@ -3,7 +3,7 @@ var app = angular.module('inprovec');
 app.controller('VendedorIndexCtrl', function ($mdEditDialog, $q, $scope, listaVendedor, $mdDialog) {
 
     $scope.query = {
-        order: 'name',
+        order: 'nombres',
         limit: 8,
         page: 1
     };
