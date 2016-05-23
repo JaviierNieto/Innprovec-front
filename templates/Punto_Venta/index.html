@@ -1,0 +1,41 @@
+<div layout="column" flex ng-controller="PuntoVentaIndexCtrl">
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-primary">
+            <div class="md-toolbar-tools" md->
+                <span>Puntos de Expendios</span>
+                <div flex></div>
+                <md-button  class="md-primary" ng-click="showAdd($event)">Nuevo Vendedor </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">
+                <thead md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column md-order-by="nombre"><span>Nombre</span></th>
+                    <th md-column md-order-by="ciudad.nombre"><span>Ciudad</span></th>
+                    <th md-column ><span>Direccion</span></th>
+                    <th md-column md-numeric><span>Telefono</span></th>
+                    <th md-column md-numeric><span>Stock Inicial</span></th>
+                    <th md-column md-numeric><span>Actualizacion del Stock</span></th>
+                    <th md-column md-numeric><span>Stock Final</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="PuntoVenta" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat=" punto in PuntoVenta | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ punto.nombre }}</td>
+                    <td md-cell>{{ punto.ciudad.nombre }} / {{punto.ciudad.departamento.nombre}}</td>
+                    <td md-cell>{{ punto.direccion }}</td>
+                    <td md-cell>{{ punto.telefono  }}</td>
+                    <td md-cell>{{ punto.stock_inicial  }}</td>
+                    <td md-cell>{{ punto.stock_actualizacion  }}</td>
+                    <td md-cell>{{ punto.stock_final  }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{ PuntoVenta.length }}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+    </md-card>
+    </md-content>
+</div>
