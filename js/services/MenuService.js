@@ -4,7 +4,7 @@ app.factory('MenuService', function() {
             {label:'Punto de Expendio', icon: 'people', separator: false, ui: 'puntoVenta_index'},
             {label:'Vendedores', icon: 'person', separator: false, ui: 'vendedor_index'},
             {label:'Ventas', icon: 'add_shopping_cart', separator: false, ui: 'venta'},
-            {label:'Bodega', icon: 'store_mall_directory', separator: false, ui: 'bodega'}
+            {label:'Bodega', icon: 'store_mall_directory', separator: false, ui: 'bodega_index'}
         ],
         _current = 'Clientes';
 

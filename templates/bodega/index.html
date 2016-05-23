@@ -1,0 +1,36 @@
+<div layout="column" flex ng-controller="BodegaIndexCtrl">
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-primary">
+            <div class="md-toolbar-tools" md->
+                <span>Bodega de Cilindros</span>
+                <div flex></div>
+                <!-- <md-button  class="md-primary" ng-click="showAdd($event)">Nuevo Vendedor </md-button> -->
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">
+                <thead md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column md-order-by="categoria.nombre"><span>categoria</span></th>
+                    <th md-column><span>Tipo</span></th>
+                    <th md-column><span>Cantidad Vacio</span></th>
+                    <th md-column><span>Cantidad Lleno</span></th>
+                    <th md-column><span>Total</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="bodega" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat=" bod in bodega | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ bod.categoria.nombre  }}</td>
+                    <td md-cell>{{ bod.tipo.peso  }}</td>
+                    <td md-cell>{{ bod.cantidad_vacio }}</td>
+                    <td md-cell>{{ bod.cantidad_lleno }}</td>
+                    <td md-cell>{{ bod.total }}</td>
+                </tbody>
+            </table>
+        </md-table-container>
+
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{ bodega.length }}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+    </md-card>
+    </md-content>
+</div>

@@ -5,7 +5,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('puntoVenta_index',{
             url: '/puntoVenta/',
-            templateUrl: 'templates/Punto_venta/index.html',
+            templateUrl: 'templates/punto_venta/index.html',
             controller: 'PuntoVentaIndexCtrl'
         })
 
