@@ -18,21 +18,27 @@
                 <md-input-container flex>
                     <label>Telefono</label> <input ng-model="PuntoVenta.telefono">
                 </md-input-container>
-                <md-select placeholder="Seleccione un departamento" ng-model="PuntoVenta.ciudad.departamento.nombre" md-on-open="loadUsers()" style="min-width: 200px;">
-                    <md-option ng-value="user" ng-repeat="user in users">{{user.PuntoVenta.ciudad.departamento.nombre}}</md-option>
+                <md-input-container flex>
+                    <label>Direccion</label> <input ng-model="PuntoVenta.direccion">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Stock inicial</label> <input ng-model="PuntoVenta.stock_inicial">
+                </md-input-container>
+                <br>
+            </div>
+            <div layaout layout-sm="column">
+                <md-select placeholder="Seleccione un departamento" ng-model="a"  md-on-open="loadDepar()">
+                    <md-option ng-value="depar.id" ng-repeat="depar in Departamento">{{depar.nombre}}</md-option>
                 </md-select>
-                <md-input-container flex>
-                    <label>direccion</label> <input ng-model="PuntoVenta.direccion">
-                </md-input-container>
-                <md-input-container flex>
-                    <label>Telefono</label> <input ng-model="vendedor.telefono">
-                </md-input-container>
+                <md-select placeholder="Seleccione un departamento" ng-model="a"  md-on-open="loadDepar()">
+                    <md-option ng-value="depar.id" ng-repeat="depar in Departamento">{{depar.nombre}}</md-option>
+                </md-select>
             </div>
         </form>
     </md-content>
     <div class="md-dialog-actions" layout="row">
         <span flex></span>
         <md-button ng-click="cancel()"> Cancelar </md-button>
-        <md-button ng-click="answer('useful')" class="md-primary"> Guardar </md-button>
+        <md-button ng-click="answer('useful')" class="md-accent"> Guardar </md-button>
     </div>
 </md-dialog>

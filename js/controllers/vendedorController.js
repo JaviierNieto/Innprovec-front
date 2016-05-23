@@ -2,6 +2,7 @@ var app = angular.module('inprovec');
 
 app.controller('VendedorIndexCtrl', function ($mdEditDialog, $q, $scope, listaVendedor, $mdDialog) {
 
+
     $scope.query = {
         order: 'nombres',
         limit: 8,
