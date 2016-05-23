@@ -1,5 +1,5 @@
 <div class="toolbar" ng-controller="sidenavCtrl">
-    <md-toolbar>
+    <md-toolbar md-whiteframe="4">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()">
                 <i class="material-icons">menu</i>
@@ -18,7 +18,7 @@
                 <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
                     <i class="material-icons">more_vert</i>
                 </md-button>
-                <md-menu-content width="2" md-position-mode="target-right target">
+                <md-menu-content md-whiteframe="2" width="2" md-position-mode="target-right target">
                     <md-menu-item>
                         <md-button>
                             <span> Modificar Usuario</span>
@@ -34,7 +34,7 @@
         </div>
     </md-toolbar>
 
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-whiteframe="16">
         <md-toolbar class="md-theme-light">
             <h1 class="md-toolbar-tools">Inprovec</h1>
         </md-toolbar>
