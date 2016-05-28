@@ -15,11 +15,17 @@ app.controller('VendedorIndexCtrl', function ($mdEditDialog, $scope, listaVended
         page: 1
     };
 
-    $scope.vendedor = listaVendedor.query();
+    $scope.vendedores = listaVendedor.query();
 
     $scope.eliminar = function () {
         listaVendedor.delete({id:$scope.selected[0].id},function (data) {
-            /*aca un mensaje*/ alert(data.nombres+' se ha eliminado');
+            $scope.ven = []
+            $scope.vendedores.forEach(function (vendedor) {
+                if (vendedor.id != $scope.selected[0].id) $scope.ven.push(vendedor)
+            });
+            $scope.vendedores = $scope.ven
+            $scope.selected = [];
+            /*aca un mensaje*/ alert('se ha eliminado');
         },function (err) {
             console.log(err)
         })

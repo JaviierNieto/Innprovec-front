@@ -28,17 +28,17 @@
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row md-select="vende" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat=" vende in vendedor | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                    <td md-cell>{{ vende.nombres }}</td>
-                    <td md-cell>{{ vende.apellidos }}</td>
-                    <td md-cell>{{ vende.cedula }}</td>
-                    <td md-cell>{{ vende.telefono  }}</td>
+                <tr md-row md-select="vendedor" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat=" vendedor in vendedores | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ vendedor.nombres }}</td>
+                    <td md-cell>{{ vendedor.apellidos }}</td>
+                    <td md-cell>{{ vendedor.cedula }}</td>
+                    <td md-cell>{{ vendedor.telefono  }}</td>
                 </tr>
                 </tbody>
             </table>
         </md-table-container>
 
-        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{ vendedor.length }}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{ vendedores.length }}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
     </md-card>
     </md-content>
 </div>

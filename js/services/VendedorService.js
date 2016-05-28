@@ -6,7 +6,7 @@ listaVendedor.$inject =['$resource', '$rootScope'];
 
 function listaVendedor($resource, $rootScope) {
 
-    return $resource($rootScope.ruta + '/vendedores/:id',{},{
+    return $resource($rootScope.ruta + '/vendedores/:id/',{},{
         'update':{
             method: 'PATCH'
         }
