@@ -1,14 +1,14 @@
 var app = angular.module("inprovec");
 
-app.factory('listaDepartamento',listaDepartamento);
+app.factory('listaCiudad',listaCiudad);
 
-listaDepartamento.$inject =['$resource', '$rootScope'];
+listaCiudad.$inject =['$resource', '$rootScope'];
 
-function listaDepartamento($resource, $rootScope) {
+function listaCiudad($resource, $rootScope) {
 
-    return $resource($rootScope.ruta + '/departamentos/:id',{},{
-        'update':{
-            method: 'PATCH'
+    return $resource($rootScope.ruta + '/ciudades/:id',{},{
+        get:{
+            isArray:true
         }
     })
 }

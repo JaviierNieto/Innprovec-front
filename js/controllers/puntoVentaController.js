@@ -1,6 +1,13 @@
 var app = angular.module('inprovec');
 
-app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta,listaDepartamento, $mdDialog ,$timeout) {
+app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta) {
+
+    $scope.selected = [];
+
+    $scope.options = {
+        autoSelect: true,
+        rowSelection: true
+    };
 
     $scope.query = {
         order: 'nombre',
@@ -8,34 +15,65 @@ app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, lista
         page: 1
     };
 
-    $scope.PuntoVenta = listaPuntoVenta.query();
+    $scope.PuntosVenta = listaPuntoVenta.query();
 
-    
+    $scope.eliminar = function () {
+        listaPuntoVenta.delete({id:$scope.selected[0].id},function (data) {
+            $scope.nuevo = [];
+            $scope.PuntosVenta.forEach(function (punto) {
+                if (punto.id != $scope.selected[0].id) $scope.nuevo.push(punto)
+            });
+            $scope.PuntosVenta = $scope.nuevo;
+            $scope.selected = [];
+            console.log('se ha eliminado');
+        },function (err) {
+            console.log(err)
+        })
+    }
 
-    $scope.showAdd = function(ev) {
-        $mdDialog.show({
-            controller: DialogController,
-            templateUrl: "templates/Punto_Venta/_fromPunt.html",
-            targetEvent: ev
-        });
-    };
+});
 
-    var DialogController = function ($scope, $mdDialog) {
-        $scope.loadDepar = function() {
-            // Use timeout to simulate a 650ms request.
-            return $timeout(function() {
-                $scope.Departamento = listaDepartamento.query();
-            }, 650);
-        };
-        $scope.hide = function() {
-            $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-            $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-            console.log($scope.a);
-            $mdDialog.hide(answer);
-        };
-    };
+app.controller('PuntoVentaCreateCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaDepartamento, listaCiudad) {
+    $scope.departamentos = listaDepartamento.query();
+
+    $scope.$watch('departamento', function(data) {
+        if (data != undefined){
+            $scope.ciudades = listaCiudad.get({'departamento':data});
+            console.log(data)
+        }
+    });
+
+    $scope.guardar = function () {
+        listaPuntoVenta.save($scope.punto,function (data) {
+            console.log('guardado' + data)
+        },function (err) {
+            console.log(err)
+        })
+    }
+
+});
+
+app.controller('PuntoVentaUpdateCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaDepartamento, listaCiudad, $stateParams, $state) {
+    $scope.departamentos = listaDepartamento.query();
+
+    $scope.$watch('departamento', function(data) {
+        if (data != undefined){
+            $scope.ciudades = listaCiudad.get({'departamento':data});
+            console.log(data)
+        }
+    });
+
+    $scope.punto = listaPuntoVenta.get({'id':$stateParams.id},function (data) {
+        $scope.departamento = data.ciudad.departamento.id;
+        $scope.punto.ciudad = data.ciudad.id;
+    });
+
+    $scope.guardar = function () {
+        listaPuntoVenta.update({'id':$stateParams.id},$scope.punto,function (data) {
+            $state.go('puntoVenta_index')
+        },function (err) {
+            console.log(err)
+        })
+    }
+
 });

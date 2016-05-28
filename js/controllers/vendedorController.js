@@ -1,7 +1,6 @@
 var app = angular.module('inprovec');
 
 app.controller('VendedorIndexCtrl', function ($mdEditDialog, $scope, listaVendedor) {
-
     $scope.selected = [];
 
     $scope.options = {
@@ -25,12 +24,11 @@ app.controller('VendedorIndexCtrl', function ($mdEditDialog, $scope, listaVended
             });
             $scope.vendedores = $scope.ven
             $scope.selected = [];
-            /*aca un mensaje*/ alert('se ha eliminado');
+            alert('se ha eliminado');
         },function (err) {
             console.log(err)
         })
     }
-
 });
 
 app.controller('VendedorCreateCtrl', function ($mdEditDialog, $scope, listaVendedor) {
@@ -44,12 +42,12 @@ app.controller('VendedorCreateCtrl', function ($mdEditDialog, $scope, listaVende
     };
 });
 
-app.controller('VendedorUpdateCtrl', function ($mdEditDialog, $scope, listaVendedor, $stateParams) {
+app.controller('VendedorUpdateCtrl', function ($mdEditDialog, $scope, listaVendedor, $stateParams, $state) {
     $scope.vendedor = listaVendedor.get({id:$stateParams.id});
     $scope.guardarVendedor = function () {
-        listaVendedor.update($scope.vendedor,function (data) {
-            $scope.vendedor = {};
+        listaVendedor.update({id:$stateParams.id},$scope.vendedor,function (data) {
             /*aca un mensaje*/ alert(data.nombres+' se ha modificado');
+            $state.go('vendedor_index')
         },function (err) {
             alert("ojo la estas cagando")
         })

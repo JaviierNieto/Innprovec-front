@@ -8,5 +8,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/punto_venta/index.html',
             controller: 'PuntoVentaIndexCtrl'
         })
+        .state('puntoVenta_create',{
+            url: '/punto/create/',
+            templateUrl: 'templates/punto_venta/_formPunt.html',
+            controller: 'PuntoVentaCreateCtrl'
+        })
+        .state('puntoVenta_update',{
+            url: '/punto/:id/edit/',
+            templateUrl: 'templates/punto_venta/_formPunt.html',
+            controller: 'PuntoVentaUpdateCtrl'
+        })
 
 });

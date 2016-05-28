@@ -6,9 +6,5 @@ listaDepartamento.$inject =['$resource', '$rootScope'];
 
 function listaDepartamento($resource, $rootScope) {
 
-    return $resource($rootScope.ruta + '/departamentos/:id',{},{
-        'update':{
-            method: 'PATCH'
-        }
-    })
+    return $resource($rootScope.ruta + '/departamentos/:id')
 }

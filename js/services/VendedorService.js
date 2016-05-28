@@ -7,8 +7,8 @@ listaVendedor.$inject =['$resource', '$rootScope'];
 function listaVendedor($resource, $rootScope) {
 
     return $resource($rootScope.ruta + '/vendedores/:id/',{},{
-        'update':{
-            method: 'PATCH'
+        update:{
+            method: 'PUT'
         }
     })
 }

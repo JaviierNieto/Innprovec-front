@@ -14,7 +14,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             controller: 'VendedorCreateCtrl'
         })
         .state('vendedor_update',{
-            url: '/vendedor/update/:id',
+            url: '/vendedor/:id/edit/',
             templateUrl: 'templates/Vendedor/_formVend.html',
             controller: 'VendedorUpdateCtrl'
         })
