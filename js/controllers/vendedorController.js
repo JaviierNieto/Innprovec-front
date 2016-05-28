@@ -2,6 +2,12 @@ var app = angular.module('inprovec');
 
 app.controller('VendedorIndexCtrl', function ($mdEditDialog, $q, $scope, listaVendedor, $mdDialog) {
 
+    $scope.selected = [];
+
+    $scope.options = {
+        autoSelect: true,
+        rowSelection: true
+    };
 
     $scope.query = {
         order: 'nombres',
