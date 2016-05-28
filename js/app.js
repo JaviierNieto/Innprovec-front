@@ -7,6 +7,8 @@ app.config(function($mdThemingProvider, $httpProvider, $resourceProvider) {
         .accentPalette('blue')
         .warnPalette('deep-orange')
         .backgroundPalette('grey');
+
+    $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
@@ -14,5 +16,5 @@ app.config(function($mdThemingProvider, $httpProvider, $resourceProvider) {
 });
 
 app.run(function ($rootScope) {
-    $rootScope.ruta = 'http://api-ing.herokuapp.com/';
+    $rootScope.ruta = 'http://api-ing.herokuapp.com';
 });

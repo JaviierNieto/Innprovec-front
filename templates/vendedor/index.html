@@ -1,7 +1,7 @@
-<div layout="column" flex ng-controller="VendedorIndexCtrl">
+<div layout="column" flex>
     <md-card>
         <md-toolbar class="md-table-toolbar md-primary" ng-hide="options.rowSelection && selected.length">
-            <div class="md-toolbar-tools" md->
+            <div class="md-toolbar-tools">
                 <span>Vendedores</span>
                 <div flex></div>
                 <md-button  class="md-icon-button md-primary" ui-sref="vendedor_create"><i class="material-icons">person_add</i></md-button>
@@ -9,11 +9,11 @@
         </md-toolbar>
 
         <md-toolbar class="md-table-toolbar md-primary" ng-show="options.rowSelection && selected.length">
-            <div class="md-toolbar-tools" md->
+            <div class="md-toolbar-tools">
                 <span>Vendedores</span>
-                <div flex></div>
-                <mb-button class="md-icon-button md-primary" style=""><i class="material-icons">edit</i></mb-button>
-                <mb-button class="md-icon-button md-primary"><i class="material-icons">delete_forever</i></mb-button>
+                <div flex="95"></div>
+                <md-button class="md-icon-button md-primary" style="" ui-sref="vendedor_update({id:selected[0].id})"><i class="material-icons">edit</i></md-button>
+                <md-button flex="5" class="md-icon-button md-primary" ng-click="eliminar()"><i class="material-icons">delete_forever</i></md-button>
             </div>
         </md-toolbar>
 

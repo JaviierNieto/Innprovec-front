@@ -8,5 +8,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/Vendedor/index.html',
             controller: 'VendedorIndexCtrl'
         })
-
+        .state('vendedor_create',{
+            url: '/vendedor/create/',
+            templateUrl: 'templates/Vendedor/_formVend.html',
+            controller: 'VendedorCreateCtrl'
+        })
+        .state('vendedor_update',{
+            url: '/vendedor/update/:id',
+            templateUrl: 'templates/Vendedor/_formVend.html',
+            controller: 'VendedorUpdateCtrl'
+        })
 });
