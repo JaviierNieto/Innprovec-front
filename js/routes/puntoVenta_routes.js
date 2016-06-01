@@ -5,17 +5,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('puntoVenta_index',{
             url: '/puntoVenta/',
-            templateUrl: 'templates/punto_venta/index.html',
+            templateUrl: 'templates/puntoVenta/index.html',
             controller: 'PuntoVentaIndexCtrl'
         })
         .state('puntoVenta_create',{
             url: '/punto/create/',
-            templateUrl: 'templates/punto_venta/_formPunt.html',
+            templateUrl: 'templates/puntoVenta/_formPunt.html',
             controller: 'PuntoVentaCreateCtrl'
         })
         .state('puntoVenta_update',{
             url: '/punto/:id/edit/',
-            templateUrl: 'templates/punto_venta/_formPunt.html',
+            templateUrl: 'templates/puntoVenta/_formPunt.html',
             controller: 'PuntoVentaUpdateCtrl'
         })
 
