@@ -25,7 +25,6 @@
                     <th md-column md-order-by="ciudad.nombre"><span>Ciudad</span></th>
                     <th md-column ><span>Direccion</span></th>
                     <th md-column><span>Telefono</span></th>
-                    <th md-column><span>Stock</span></th>
                 </tr>
                 </thead>
                 <tbody md-body>
@@ -34,7 +33,6 @@
                     <td md-cell>{{ punto.ciudad.nombre }} / {{punto.ciudad.departamento.nombre}}</td>
                     <td md-cell>{{ punto.direccion }}</td>
                     <td md-cell>{{ punto.telefono  }}</td>
-                    <td md-cell> Ver Stock </td>
                 </tr>
                 </tbody>
             </table>
@@ -42,5 +40,37 @@
 
         <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{ PuntosVenta.length }}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
     </md-card>
-    </md-content>
+
+    <md-card>
+        <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">
+            <div class="md-toolbar-tools">
+                <span>Stock</span>
+                <span flex></span>
+                <md-button class="md-icon-button md-primary" style="" ui-sref="puntoVenta_update_stock({id:selected[0].id})"><i class="material-icons">edit</i></md-button>
+            </div>
+        </md-toolbar>
+
+        <md-table-container ng-show="options.rowSelection && selected.length">
+            <table md-table>
+                <thead md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column md-order-by="nombre"><span>Categoria</span></th>
+                    <th md-column ><span>Tipo</span></th>
+                    <th md-column ><span>Cantidad Inicial</span></th>
+                    <th md-column ><span>Modificacion</span></th>
+                    <th md-column ><span>Cantidad Total</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="stock"  ng-repeat=" stock in stocks | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ stock.cilindro.categoria.nombre }}</td>
+                    <td md-cell>{{ stock.cilindro.tipo.peso }}</td>
+                    <td md-cell>{{ stock.cantidad_inicial }}</td>
+                    <td md-cell>{{ aumento(stock.cantidad_total,stock.cantidad_inicial) }}</td>
+                    <td md-cell>{{ stock.cantidad_total }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+    </md-card>
 </div>

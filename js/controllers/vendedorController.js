@@ -35,7 +35,7 @@ app.controller('VendedorCreateCtrl', function ($mdEditDialog, $scope, listaVende
     $scope.guardarVendedor = function () {
         listaVendedor.save($scope.vendedor,function (data) {
             $scope.vendedor = {};
-            /*aca un mensaje*/ alert(data.nombres+' se ha guardado');
+            /*aca un mensaje*/ /* alert(data.nombres+' se ha guardado'); */
         },function (err) {
             alert("ojo la estas cagando")
         })

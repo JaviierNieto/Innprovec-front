@@ -1,6 +1,6 @@
 var app = angular.module('inprovec');
 
-app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta) {
+app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaStock) {
 
     $scope.selected = [];
 
@@ -17,6 +17,7 @@ app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, lista
 
     $scope.PuntosVenta = listaPuntoVenta.query();
 
+
     $scope.eliminar = function () {
         listaPuntoVenta.delete({id:$scope.selected[0].id},function (data) {
             $scope.nuevo = [];
@@ -29,8 +30,24 @@ app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, lista
         },function (err) {
             console.log(err)
         })
-    }
+    };
 
+    $scope.$watch('selected.length', function (data) {
+        if (data>0){
+            $scope.stocks = listaStock.get({'punto_expendio': $scope.selected[0].id})
+        }
+    })
+
+    $scope.aumento = function (total,inicial) {
+        valor =  (total-inicial);
+        if (valor < 0){
+            return "Disminuyo "+ (valor * -1)
+        }else if(valor>0){
+            return "Aumento "+ valor
+        }else {
+            return "Sin Cambio"
+        }
+    }
 });
 
 app.controller('PuntoVentaCreateCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaDepartamento, listaCiudad) {
@@ -76,4 +93,10 @@ app.controller('PuntoVentaUpdateCtrl', function ($mdEditDialog, $q, $scope, list
         })
     }
 
+});
+
+app.controller('PuntoVentaUpdateStockCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaStock, $stateParams) {
+    $scope.stocksupdate = listaStock.get({'punto_expendio': $stateParams.id}, function (data) {
+        console.log(data)
+    })
 });

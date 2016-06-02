@@ -1,4 +1,4 @@
-<div layout="column" flex>
+<div>
     <md-card>
         <md-toolbar class="md-table-toolbar md-primary" ng-show="!options.rowSelection || !selected.length">
             <div class="md-toolbar-tools">
@@ -40,5 +40,4 @@
 
         <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{ vendedores.length }}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
     </md-card>
-    </md-content>
 </div>

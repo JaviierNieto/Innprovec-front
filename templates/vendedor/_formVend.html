@@ -1,4 +1,4 @@
-<div>
+<div layout="row" layout-xs="column" layout-align="center center">
     <md-card>
         <md-toolbar>
             <h2 class="md-toolbar-tools" layout-align="center center">
@@ -7,21 +7,23 @@
         </md-toolbar>
         <md-content class="md-padding" layout="row" layout-align="center center">
             <form name="userForm">
-                <div layout layout-sm="column">
-                    <md-input-container flex>
-                        <label>Nombres</label>
-                        <input ng-model="vendedor.nombres">
-                    </md-input-container>
-                    <md-input-container flex>
-                        <label>Apellidos</label> <input ng-model="vendedor.apellidos">
-                    </md-input-container>
-                    <md-input-container flex>
-                        <label>Cedula</label> <input ng-model="vendedor.cedula">
-                    </md-input-container>
-                    <md-input-container flex>
-                        <label>Telefono</label> <input ng-model="vendedor.telefono">
-                    </md-input-container>
-                </div>
+                <md-list-item>
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                            <label>Nombres</label>
+                            <input ng-model="vendedor.nombres">
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Apellidos</label> <input ng-model="vendedor.apellidos">
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Cedula</label> <input ng-model="vendedor.cedula">
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Telefono</label> <input ng-model="vendedor.telefono">
+                        </md-input-container>
+                    </div>
+                </md-list-item>
             </form>
         </md-content>
             <md-content class="md-dialog-actions" layout="row" layout-align="end end">
