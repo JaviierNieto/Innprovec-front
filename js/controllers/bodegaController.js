@@ -1,6 +1,6 @@
 var app = angular.module('inprovec');
 
-app.controller('BodegaIndexCtrl', function ($mdEditDialog, $q, $scope, listaBodega, $mdDialog) {
+app.controller('BodegaIndexCtrl', function ($mdEditDialog, $q, $scope, listaStock) {
 
     $scope.query = {
         order: 'categoria.nombre',
@@ -8,6 +8,8 @@ app.controller('BodegaIndexCtrl', function ($mdEditDialog, $q, $scope, listaBode
         page: 1
     };
 
-    $scope.bodega = listaBodega.query();
+    $scope.bodegas = listaStock.get({'punto_expendio': 1}, function (data) {
+        console.log(data)
+    });
 
 });

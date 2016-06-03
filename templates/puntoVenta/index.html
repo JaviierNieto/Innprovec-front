@@ -56,18 +56,19 @@
                 <tr md-row>
                     <th md-column ><span>Categoria</span></th>
                     <th md-column ><span>Tipo</span></th>
-                    <th md-column ><span>Cantidad Inicial</span></th>
-                    <th md-column ><span>Modificacion</span></th>
-                    <th md-column ><span>Cantidad Total</span></th>
+                    <th md-column ><span>Inicial (llenos / vacios)</span></th>
+                    <th md-column ><span>Modificacion (llenos / vacios)</span></th>
+                    <th md-column ><span>Total (llenos / vacios)</span></th>
                 </tr>
                 </thead>
                 <tbody md-body>
                 <tr md-row md-select="stock"  ng-repeat=" stock in stocks | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
                     <td md-cell>{{ stock.cilindro.categoria.nombre }}</td>
                     <td md-cell>{{ stock.cilindro.tipo.peso }}</td>
-                    <td md-cell>{{ stock.cantidad_inicial }}</td>
-                    <td md-cell>{{ aumento(stock.cantidad_total,stock.cantidad_inicial) }}</td>
-                    <td md-cell>{{ stock.cantidad_total }}</td>
+                    <td md-cell>{{ stock.cantidad_inicial_llenos }} / {{ stock.cantidad_inicial_vacios }}</td>
+                    <td md-cell>{{ aumento(stock.cantidad_total_llenos, stock.cantidad_total_vacios,
+                        stock.cantidad_inicial_llenos, stock.cantidad_inicial_vacios) }}</td>
+                    <td md-cell>{{ stock.cantidad_total_llenos }} / {{ stock.cantidad_total_vacios }}</td>
                 </tr>
                 </tbody>
             </table>

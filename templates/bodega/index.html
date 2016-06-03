@@ -1,4 +1,4 @@
-<div layout="column" flex ng-controller="BodegaIndexCtrl">
+<div layout="column" flex>
     <md-card>
         <md-toolbar class="md-table-toolbar md-primary">
             <div class="md-toolbar-tools" md->
@@ -14,18 +14,18 @@
                 <tr md-row>
                     <th md-column md-order-by="categoria.nombre"><span>categoria</span></th>
                     <th md-column><span>Tipo</span></th>
-                    <th md-column><span>Cantidad Vacio</span></th>
-                    <th md-column><span>Cantidad Lleno</span></th>
+                    <th md-column><span>Cantidad Vacios</span></th>
+                    <th md-column><span>Cantidad Llenos</span></th>
                     <th md-column><span>Total</span></th>
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row md-select="bodega" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat=" bod in bodega | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                    <td md-cell>{{ bod.categoria.nombre  }}</td>
-                    <td md-cell>{{ bod.tipo.peso  }}</td>
-                    <td md-cell>{{ bod.cantidad_vacio }}</td>
-                    <td md-cell>{{ bod.cantidad_lleno }}</td>
-                    <td md-cell>{{ bod.total }}</td>
+                <tr md-row md-select="bodega" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bodega in bodegas | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ bodega.cilindro.categoria.nombre  }}</td>
+                    <td md-cell>{{ bodega.cilindro.tipo.peso  }}</td>
+                    <td md-cell>{{ bodega.cantidad_total_vacios }}</td>
+                    <td md-cell>{{ bodega.cantidad_total_llenos }}</td>
+                    <td md-cell>{{ bodega.cantidad_total_llenos + bodega.cantidad_total_vacios }}</td>
                 </tbody>
             </table>
         </md-table-container>
