@@ -1,0 +1,44 @@
+<div layout="row" layout-xs="column" layout-align="center center">
+    <md-card>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Datos del Punto de Expendio</h2>
+            </div>
+        </md-toolbar>
+        <md-content class="md-padding" layout="row" layout-align="center center">
+            <form name="userForm">
+                <md-list-item>
+                    <div layout layout-sm="column" class="md-block">
+                        <md-input-container flex>
+                            <label>Nombre</label>
+                            <input ng-model="punto.nombre">
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Telefono</label> <input ng-model="punto.telefono">
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Direccion</label> <input ng-model="punto.direccion">
+                        </md-input-container>
+                    </div>
+                </md-list-item>
+                <div layout layout-sm="column" class="md-block">
+                    <md-select flex placeholder="Seleccione un departamento" ng-model="departamento" >
+                        <md-option ng-value="depar.id" ng-repeat="depar in departamentos">{{depar.nombre}}</md-option>
+                    </md-select>
+                    <md-select flex placeholder="Seleccione una ciudad" ng-model="punto.ciudad" ng-show="departamento!=undefined">
+                        <md-option ng-value="ciu.id" ng-repeat="ciu in ciudades">{{ciu.nombre}}</md-option>
+                    </md-select>
+                </div>
+            </form>
+        </md-content>
+        <div>
+        <md-content layout="row" layout-align="center center">
+            <div flex="20"></div>
+            <div class="md-padding" layout="row">
+                <span flex></span>
+                <md-button ui-sref="puntoVenta_index" class="md-warn"> Cancelar </md-button>
+                <md-button ng-click="guardar()" class="md-accent"> Guardar </md-button>
+            </div>
+        </md-content>
+    </md-card>
+</div>

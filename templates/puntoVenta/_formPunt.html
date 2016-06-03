@@ -21,8 +21,7 @@
                         </md-input-container>
                     </div>
                 </md-list-item>
-                <md-list-item>
-                    <div layout >
+                    <div layout layout-sm="column" class="md-block">
                         <md-select flex placeholder="Seleccione un departamento" ng-model="departamento" >
                             <md-option ng-value="depar.id" ng-repeat="depar in departamentos">{{depar.nombre}}</md-option>
                         </md-select>
@@ -30,7 +29,6 @@
                             <md-option ng-value="ciu.id" ng-repeat="ciu in ciudades">{{ciu.nombre}}</md-option>
                         </md-select>
                     </div>
-                </md-list-item>
             </form>
         </md-content>
         <div>

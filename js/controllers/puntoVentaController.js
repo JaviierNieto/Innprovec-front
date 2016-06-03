@@ -16,6 +16,7 @@ app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, lista
     };
 
     $scope.PuntosVenta = listaPuntoVenta.query();
+    $scope.stocksGeneral = listaStock.query();
 
 
     $scope.eliminar = function () {
@@ -32,11 +33,18 @@ app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, lista
         })
     };
 
-    $scope.$watch('selected.length', function (data) {
-        if (data>0){
-            $scope.stocks = listaStock.get({'punto_expendio': $scope.selected[0].id})
-        }
-    })
+    $scope.$watch('selected[0].id', function (data) {
+        $scope.stocks = [];
+            try {
+                if ($scope.selected[0].id>0){
+                    $scope.stocksGeneral.forEach(function (data) {
+                        if (data.punto_expendio.id == $scope.selected[0].id) $scope.stocks.push(data)
+                    })
+                }
+            }
+            catch(err) {
+            }
+    });
 
     $scope.aumento = function (total,inicial) {
         valor =  (total-inicial);
@@ -57,7 +65,6 @@ app.controller('PuntoVentaCreateCtrl', function ($mdEditDialog, $q, $scope, list
     $scope.$watch('departamento', function(data) {
         if (data != undefined){
             $scope.ciudades = listaCiudad.get({'departamento':data});
-            console.log(data)
         }
     });
 
@@ -89,7 +96,6 @@ app.controller('PuntoVentaUpdateCtrl', function ($mdEditDialog, $q, $scope, list
     $scope.$watch('departamento', function(data) {
         if (data != undefined){
             $scope.ciudades = listaCiudad.get({'departamento':data});
-            console.log(data)
         }
     });
 
@@ -109,7 +115,14 @@ app.controller('PuntoVentaUpdateCtrl', function ($mdEditDialog, $q, $scope, list
 });
 
 app.controller('PuntoVentaUpdateStockCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaStock, $stateParams) {
-    $scope.stocksupdate = listaStock.get({'punto_expendio': $stateParams.id}, function (data) {
-        console.log(data)
-    })
+    $scope.stocksupdate = listaStock.get({'punto_expendio': $stateParams.id})
+
+    $scope.guardar = function () {
+        $scope.stocksupdate.forEach(function (stock) {
+            listaStock.update({'id':stock.id}, stock,function (data) {
+            },function (err) {
+                console.log(err)
+            })
+        })
+    }
 });

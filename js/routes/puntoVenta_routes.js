@@ -15,7 +15,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('puntoVenta_update',{
             url: '/punto/:id/edit/',
-            templateUrl: 'templates/puntoVenta/_formPunt.html',
+            templateUrl: 'templates/puntoVenta/_formPuntUpdate.html',
             controller: 'PuntoVentaUpdateCtrl'
         })
         .state('puntoVenta_update_stock',{
