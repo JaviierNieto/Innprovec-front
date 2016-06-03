@@ -52,6 +52,7 @@ app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, lista
 
 app.controller('PuntoVentaCreateCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaDepartamento, listaCiudad) {
     $scope.departamentos = listaDepartamento.query();
+    $scope.punto = {};
 
     $scope.$watch('departamento', function(data) {
         if (data != undefined){
@@ -60,7 +61,19 @@ app.controller('PuntoVentaCreateCtrl', function ($mdEditDialog, $q, $scope, list
         }
     });
 
+    $scope.cilindros_nombre = [
+        {categoria: "Cilindro", tipo: 15, cilindro:1, cantidad:0},
+        {categoria: "Cilindro", tipo: 18, cilindro:2, cantidad:0},
+        {categoria: "Cilindro", tipo: 45, cilindro:3, cantidad:0},
+        {categoria: "Industrial", tipo: 15, cilindro:4, cantidad:0},
+        {categoria: "Industrial", tipo: 18, cilindro:5, cantidad:0}
+    ];
+
     $scope.guardar = function () {
+        $scope.punto.cilindros = [];
+        $scope.cilindros_nombre.forEach(function (data) {
+            $scope.punto.cilindros.push({cilindro: data.cilindro, cantidad_inicial:data.cantidad})
+        });
         listaPuntoVenta.save($scope.punto,function (data) {
             console.log('guardado' + data)
         },function (err) {

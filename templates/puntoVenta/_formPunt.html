@@ -7,30 +7,32 @@
         </md-toolbar>
         <md-content class="md-padding" layout="row" layout-align="center center">
             <form name="userForm">
-                <div layout layout-sm="column">
-                    <md-input-container flex>
-                        <label>Nombre</label>
-                        <input ng-model="punto.nombre">
-                    </md-input-container>
-                    <md-input-container flex>
-                        <label>Telefono</label> <input ng-model="punto.telefono">
-                    </md-input-container>
-                    <md-input-container flex>
-                        <label>Direccion</label> <input ng-model="punto.direccion">
-                    </md-input-container>
-                    <br>
-                </div>
-                <div layaout layout-sm="column">
-                    <md-select placeholder="Seleccione un departamento" ng-model="departamento">
-                        <md-option ng-value="depar.id" ng-repeat="depar in departamentos">{{depar.nombre}}</md-option>
-                    </md-select>
-                    <md-select placeholder="Seleccione una ciudad" ng-model="punto.ciudad" ng-show="departamento!=undefined">
-                        <md-option ng-value="ciu.id" ng-repeat="ciu in ciudades">{{ciu.nombre}}</md-option>
-                    </md-select>
-                </div>
+                <md-list-item>
+                    <div layout layout-sm="column" class="md-block">
+                        <md-input-container flex>
+                            <label>Nombre</label>
+                            <input ng-model="punto.nombre">
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Telefono</label> <input ng-model="punto.telefono">
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Direccion</label> <input ng-model="punto.direccion">
+                        </md-input-container>
+                    </div>
+                </md-list-item>
+                <md-list-item>
+                    <div layout >
+                        <md-select flex placeholder="Seleccione un departamento" ng-model="departamento" >
+                            <md-option ng-value="depar.id" ng-repeat="depar in departamentos">{{depar.nombre}}</md-option>
+                        </md-select>
+                        <md-select flex placeholder="Seleccione una ciudad" ng-model="punto.ciudad" ng-show="departamento!=undefined">
+                            <md-option ng-value="ciu.id" ng-repeat="ciu in ciudades">{{ciu.nombre}}</md-option>
+                        </md-select>
+                    </div>
+                </md-list-item>
             </form>
         </md-content>
-
         <div>
             <md-toolbar>
                 <div class="md-toolbar-tools">
@@ -38,91 +40,26 @@
                 </div>
             </md-toolbar>
             <md-content class="md-padding" layout="row" layout-align="center center">
-                <form name="userForm" >
-                    <md-list-item>
+                <form name="userForm">
+                    <md-list-item ng-repeat="cilindro in cilindros_nombre">
                         <div layout layout-sm="column" class="md-block">
                             <md-input-container flex >
                                 <label>Categoria</label>
-                                <input disabled ng-model="stock.cilindro.categoria.nombre">
+                                <input disabled ng-model="cilindro.categoria">
                             </md-input-container>
                             <md-input-container flex>
                                 <label>Tipo</label>
-                                <input disabled ng-model="stock.cilindro.tipo.peso">
+                                <input disabled ng-model="cilindro.tipo">
                             </md-input-container>
                             <md-input-container flex>
                                 <label>Cantidad</label>
-                                <input ng-model="stock.cantidad_total">
-                            </md-input-container>
-                        </div>
-                    </md-list-item>
-                    <md-list-item>
-                        <div layout layout-sm="column" class="md-block">
-                            <md-input-container flex >
-                                <label>Categoria</label>
-                                <input disabled ng-model="stock.cilindro.categoria.nombre">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Tipo</label>
-                                <input disabled ng-model="stock.cilindro.tipo.peso">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Cantidad</label>
-                                <input ng-model="stock.cantidad_total">
-                            </md-input-container>
-                        </div>
-                    </md-list-item>
-                    <md-list-item>
-                        <div layout layout-sm="column" class="md-block">
-                            <md-input-container flex >
-                                <label>Categoria</label>
-                                <input disabled ng-model="stock.cilindro.categoria.nombre">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Tipo</label>
-                                <input disabled ng-model="stock.cilindro.tipo.peso">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Cantidad</label>
-                                <input ng-model="stock.cantidad_total">
-                            </md-input-container>
-                        </div>
-                    </md-list-item>
-                    <md-list-item>
-                        <div layout layout-sm="column" class="md-block">
-                            <md-input-container flex >
-                                <label>Categoria</label>
-                                <input disabled ng-model="stock.cilindro.categoria.nombre">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Tipo</label>
-                                <input disabled ng-model="stock.cilindro.tipo.peso">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Cantidad</label>
-                                <input ng-model="stock.cantidad_total">
-                            </md-input-container>
-                        </div>
-                    </md-list-item>
-                    <md-list-item>
-                        <div layout layout-sm="column" class="md-block">
-                            <md-input-container flex >
-                                <label>Categoria</label>
-                                <input disabled ng-model="stock.cilindro.categoria.nombre">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Tipo</label>
-                                <input disabled ng-model="stock.cilindro.tipo.peso">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Cantidad</label>
-                                <input ng-model="stock.cantidad_total">
+                                <input ng-model="cilindro.cantidad">
                             </md-input-container>
                         </div>
                     </md-list-item>
                 </form>
             </md-content>
         </div>
-
         <md-content layout="row" layout-align="center center">
             <div flex="20"></div>
             <div class="md-padding" layout="row">
