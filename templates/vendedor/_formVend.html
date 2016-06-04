@@ -5,33 +5,40 @@
                     <span>Registrar Nuevo Vendedor</span>
             </h2>
         </md-toolbar>
-        <md-content class="md-padding" layout="row" layout-align="center center">
-            <form name="userForm">
-                <md-list-item>
-                    <div layout layout-sm="column">
-                        <md-input-container flex>
-                            <label>Nombres</label>
-                            <input ng-model="vendedor.nombres">
-                        </md-input-container>
-                        <md-input-container flex>
-                            <label>Apellidos</label> <input ng-model="vendedor.apellidos">
-                        </md-input-container>
-                        <md-input-container flex>
-                            <label>Cedula</label> <input ng-model="vendedor.cedula">
-                        </md-input-container>
-                        <md-input-container flex>
-                            <label>Telefono</label> <input ng-model="vendedor.telefono">
-                        </md-input-container>
-                    </div>
-                </md-list-item>
-            </form>
-        </md-content>
+        <form name="userForm" ng-submit="guardarVendedor()">
+            <md-content class="md-padding" layout="row" layout-align="center center">
+
+                    <md-list-item>
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>Nombres</label>
+                                <input ng-model="vendedor.nombres" pattern="[A-Za-z]*" maxlength="20" minlength="3" required>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Apellidos</label>
+                                <input ng-model="vendedor.apellidos" pattern="[A-Za-z]*" maxlength="20" minlength="6" required>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Cedula</label>
+                                <input ng-model="vendedor.cedula" pattern="[0-9]*" maxlength="10" minlength="8" required>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Telefono</label>
+                                <input ng-model="vendedor.telefono" pattern="[0-9]*" maxlength="10" minlength="7" required>
+                            </md-input-container>
+                        </div>
+                    </md-list-item>
+
+            </md-content>
+
             <md-content class="md-dialog-actions" layout="row" layout-align="end end">
                 <div flex="20"></div>
                 <div class="md-padding" layout="row">
                     <span flex></span>
                     <md-button ui-sref="vendedor_index" class="md-warn"> Cancelar </md-button>
-                    <md-button ng-click="guardarVendedor()" class="md-accent"> Guardar </md-button>
+                    <button class="md-button md-accent"> Guardar </button>
+                </div>
             </md-content>
+        </form>
     <md-card>
 </div>

@@ -15,6 +15,13 @@ app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, lista
         page: 1
     };
 
+    $scope.filter = {};
+
+    $scope.buscare = function (valor) {
+        $scope.filter.search = "";
+        $scope.buscar = valor;
+    };
+
     /*
     $scope.PuntosVenta = []
 

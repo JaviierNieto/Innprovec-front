@@ -1,10 +1,22 @@
 <div layout="column">
     <md-card>
-        <md-toolbar class="md-table-toolbar md-primary" ng-show="!options.rowSelection || !selected.length">
+        <md-toolbar class="md-table-toolbar md-primary" ng-show="!options.rowSelection || !selected.length && !buscar">
             <div class="md-toolbar-tools">
                 <span>Puntos de expendio</span>
                 <div flex></div>
+                <md-button  class="md-icon-button md-primary" ng-click="buscare(true)"><i class="material-icons">search</i></md-button>
                 <md-button  class="md-icon-button md-primary" ui-sref="puntoVenta_create"><i class="material-icons">person_add</i></md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar md-primary" ng-show="buscar">
+            <div class="md-toolbar-tools">
+                <span>Puntos de expendio</span>
+                <div flex></div>
+                <md-input-container class="md-icon-float search-input" flex>
+                    <input class="white-font" type="text" autofocus ng-model="filter.search">
+                </md-input-container>
+                <md-button  class="md-icon-button md-primary" ng-click="buscare(false) "><i class="material-icons">close</i></md-button>
             </div>
         </md-toolbar>
 

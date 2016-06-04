@@ -1,11 +1,10 @@
 var app = angular.module('inprovec');
 
-app.controller('VendedorIndexCtrl', function ($mdEditDialog, $scope, listaVendedor) {
+app.controller('VendedorIndexCtrl', function ($mdEditDialog, $scope, listaVendedor, $mdDialog, Toast) {
     $scope.selected = [];
 
     $scope.options = {
-        autoSelect: true,
-        rowSelection: true
+        autoSelect: true
     };
 
     $scope.query = {
@@ -14,46 +13,63 @@ app.controller('VendedorIndexCtrl', function ($mdEditDialog, $scope, listaVended
         page: 1
     };
 
-    $scope.vendedores = listaVendedor.query();
-    
-    $scope.search = function (valor) {
-        $scope.buscar = valor
+
+    $scope.showConfirm = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('Eliminar Vendedor')
+            .textContent('¿desea continuar?')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('No');
+        $mdDialog.show(confirm).then(function() {
+            listaVendedor.delete({id:$scope.selected[0].id},function (data) {
+                $scope.ven = [];
+                $scope.vendedores.forEach(function (vendedor) {
+                    if (vendedor.id != $scope.selected[0].id) $scope.ven.push(vendedor)
+                });
+                $scope.vendedores = $scope.ven;
+                $scope.selected = [];
+
+                Toast.Mensaje('Vendedor Eliminado');
+                
+            },function (err) {
+                Toast.Mensaje('Error al Eliminar');
+            })
+        }, function() {
+
+        });
     };
-    
-    $scope.eliminar = function () {
-        listaVendedor.delete({id:$scope.selected[0].id},function (data) {
-            $scope.ven = []
-            $scope.vendedores.forEach(function (vendedor) {
-                if (vendedor.id != $scope.selected[0].id) $scope.ven.push(vendedor)
-            });
-            $scope.vendedores = $scope.ven
-            $scope.selected = [];
-            alert('se ha eliminado');
-        },function (err) {
-            console.log(err)
-        })
-    }
+
+    $scope.vendedores = listaVendedor.query();
+
+    $scope.filter = {};
+
+    $scope.buscare = function (valor) {
+        $scope.filter.search = "";
+        $scope.buscar = valor;
+    };
 });
 
-app.controller('VendedorCreateCtrl', function ($mdEditDialog, $scope, listaVendedor) {
+app.controller('VendedorCreateCtrl', function ($mdEditDialog, $scope, listaVendedor, Toast) {
     $scope.guardarVendedor = function () {
         listaVendedor.save($scope.vendedor,function (data) {
             $scope.vendedor = {};
-            /*aca un mensaje*/ /* alert(data.nombres+' se ha guardado'); */
+            Toast.Mensaje(data.nombres+' Guardado Correctamente');
         },function (err) {
-            alert("ojo la estas cagando")
+            Toast.Mensaje('Error al Guardar');
         })
     };
 });
 
-app.controller('VendedorUpdateCtrl', function ($mdEditDialog, $scope, listaVendedor, $stateParams, $state) {
+app.controller('VendedorUpdateCtrl', function ($mdEditDialog, $scope, listaVendedor, $stateParams, $state, Toast) {
     $scope.vendedor = listaVendedor.get({id:$stateParams.id});
     $scope.guardarVendedor = function () {
         listaVendedor.update({id:$stateParams.id},$scope.vendedor,function (data) {
-            /*aca un mensaje*/ alert(data.nombres+' se ha modificado');
+            Toast.Mensaje(data.nombres+' Modificado Correctamente');
             $state.go('vendedor_index')
         },function (err) {
-            alert("ojo la estas cagando")
+            Toast.Mensaje('Error al Modificar');
         })
     };
 });
