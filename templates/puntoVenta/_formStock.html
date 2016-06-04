@@ -5,37 +5,37 @@
                 <h2>Modificar Stock del Punto de Expendio</h2>
             </div>
         </md-toolbar>
-        <md-content class="md-padding" layout="row" layout-align="center center">
-            <form name="userForm" >
-                <md-list-item ng-repeat="stock in stocksupdate">
-                    <div layout layout-sm="column" class="md-block">
-                        <md-input-container flex >
-                            <label>Categoria</label>
-                            <input disabled ng-model="stock.cilindro.categoria.nombre">
-                        </md-input-container>
-                        <md-input-container flex>
-                            <label>Tipo</label>
-                            <input disabled ng-model=" stock.cilindro.tipo.peso">
-                        </md-input-container>
-                        <md-input-container flex>
-                            <label>Cantidad Llenos</label>
-                            <input type="number" ng-model="stock.cantidad_total_llenos">
-                        </md-input-container>
-                        <md-input-container flex>
-                            <label>Cantidad Vacios</label>
-                            <input type="number" ng-model="stock.cantidad_total_vacios">
-                        </md-input-container>
-                    </div>
-                </md-list-item>
-            </form>
-        </md-content>
-        <md-content layout="row" layout-align="center center">
-            <div flex="20"></div>
-            <div class="md-padding" layout="row">
-                <span flex></span>
-                <md-button ui-sref="puntoVenta_index" class="md-warn"> Cancelar </md-button>
-                <md-button ng-click="guardar()" class="md-accent"> Guardar </md-button>
-            </div>
-        </md-content>
+        <form ng-submit="guardar()">
+            <md-content>
+                    <md-list-item ng-repeat="stock in stocksupdate">
+                        <div layout layout-sm="column" class="md-block">
+                            <md-input-container flex >
+                                <label>Categoria</label>
+                                <input disabled ng-model="stock.cilindro.categoria.nombre">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Tipo</label>
+                                <input disabled ng-model=" stock.cilindro.tipo.peso">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Cantidad Llenos</label>
+                                <input type="number" ng-model="stock.cantidad_total_llenos">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Cantidad Vacios</label>
+                                <input type="number" ng-model="stock.cantidad_total_vacios">
+                            </md-input-container>
+                        </div>
+                    </md-list-item>
+            </md-content>
+            <md-content class="md-dialog-actions" layout="row" layout-align="end end">
+                <div flex="20"></div>
+                <div class="md-padding" layout="row">
+                    <span flex></span>
+                    <md-button ui-sref="puntoVenta_index" class="md-warn"> Cancelar </md-button>
+                    <button class="md-button md-accent"> Guardar </button>
+                </div>
+            </md-content>
+        </form>
     </md-card>
 </div>

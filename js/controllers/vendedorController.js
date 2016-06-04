@@ -15,7 +15,6 @@ app.controller('VendedorIndexCtrl', function ($mdEditDialog, $scope, listaVended
 
 
     $scope.showConfirm = function(ev) {
-        // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
             .title('Eliminar Vendedor')
             .textContent('¿desea continuar?')
@@ -55,9 +54,9 @@ app.controller('VendedorCreateCtrl', function ($mdEditDialog, $scope, listaVende
     $scope.guardarVendedor = function () {
         listaVendedor.save($scope.vendedor,function (data) {
             $scope.vendedor = {};
-            Toast.Mensaje(data.nombres+' Guardado Correctamente');
+            Toast.Mensaje('Vendedor Creado');
         },function (err) {
-            Toast.Mensaje('Error al Guardar');
+            Toast.Mensaje('Error al Crear Vendedor');
         })
     };
 });
@@ -66,7 +65,7 @@ app.controller('VendedorUpdateCtrl', function ($mdEditDialog, $scope, listaVende
     $scope.vendedor = listaVendedor.get({id:$stateParams.id});
     $scope.guardarVendedor = function () {
         listaVendedor.update({id:$stateParams.id},$scope.vendedor,function (data) {
-            Toast.Mensaje(data.nombres+' Modificado Correctamente');
+            Toast.Mensaje('Modificado Correctamente');
             $state.go('vendedor_index')
         },function (err) {
             Toast.Mensaje('Error al Modificar');

@@ -5,32 +5,36 @@
                 <h2>Datos del Punto de Expendio</h2>
             </div>
         </md-toolbar>
-        <md-content class="md-padding" layout="row" layout-align="center center">
-            <form name="userForm">
+        <form ng-submit="guardar()">
+            <md-content>
                 <md-list-item>
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex>
                             <label>Nombre</label>
-                            <input ng-model="punto.nombre" autofocus>
+                            <input ng-model="punto.nombre" pattern="[A-Za-z]*" maxlength="20" minlength="8" required>
                         </md-input-container>
                         <md-input-container flex>
-                            <label>Telefono</label> <input ng-model="punto.telefono">
+                            <label>Telefono</label>
+                            <input ng-model="punto.telefono" pattern="[0-9]*" maxlength="10" minlength="7" required>
                         </md-input-container>
                         <md-input-container flex>
-                            <label>Direccion</label> <input ng-model="punto.direccion">
+                            <label>Direccion</label>
+                            <input ng-model="punto.direccion" required>
                         </md-input-container>
                     </div>
                 </md-list-item>
                     <div layout layout-sm="column" class="md-block">
-                        <md-select flex placeholder="Seleccione un departamento" ng-model="departamento" >
-                            <md-option ng-value="depar.id" ng-repeat="depar in departamentos">{{depar.nombre}}</md-option>
-                        </md-select>
-                        <md-select flex placeholder="Seleccione una ciudad" ng-model="punto.ciudad" ng-show="departamento!=undefined">
-                            <md-option ng-value="ciu.id" ng-repeat="ciu in ciudades">{{ciu.nombre}}</md-option>
-                        </md-select>
+                        <md-list-item>
+                            <md-select flex placeholder="Seleccione un departamento" ng-model="departamento" >
+                                <md-option ng-value="depar.id" ng-repeat="depar in departamentos">{{depar.nombre}}</md-option>
+                            </md-select>
+                            <md-select flex placeholder="Seleccione una ciudad" ng-model="punto.ciudad" ng-show="departamento!=undefined">
+                                <md-option ng-value="ciu.id" ng-repeat="ciu in ciudades">{{ciu.nombre}}</md-option>
+                            </md-select>
+                        </md-list-item>
                     </div>
-            </form>
-        </md-content>
+            </md-content>
+        </form>
         <div>
             <md-toolbar>
                 <div class="md-toolbar-tools">
@@ -67,7 +71,7 @@
             <div class="md-padding" layout="row">
                 <span flex></span>
                 <md-button ui-sref="puntoVenta_index" class="md-warn"> Cancelar </md-button>
-                <md-button ng-click="guardar()" class="md-accent"> Guardar </md-button>
+                <button class="md-button md-accent"> Guardar </button>
             </div>
         </md-content>
     </md-card>

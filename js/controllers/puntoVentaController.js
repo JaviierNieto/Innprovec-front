@@ -1,6 +1,6 @@
 var app = angular.module('inprovec');
 
-app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaStock) {
+app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaStock, $mdDialog, Toast) {
 
     $scope.selected = [];
 
@@ -37,20 +37,28 @@ app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, lista
     $scope.stocksGeneral = listaStock.query();
     $scope.PuntosVenta = listaPuntoVenta.query();
 
-
-    $scope.eliminar = function () {
-        listaPuntoVenta.delete({id:$scope.selected[0].id},function (data) {
-            $scope.nuevo = [];
-            $scope.PuntosVenta.forEach(function (punto) {
-                if (punto.id != $scope.selected[0].id) $scope.nuevo.push(punto)
-            });
-            $scope.PuntosVenta = $scope.nuevo;
-            $scope.selected = [];
-            console.log('se ha eliminado');
-        },function (err) {
-            console.log(err)
-        })
+    $scope.showConfirm = function(ev) {
+        var confirm = $mdDialog.confirm()
+            .title('Eliminar Punto de Expendio')
+            .textContent('¿desea continuar?')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('No');
+        $mdDialog.show(confirm).then(function() {
+            listaPuntoVenta.delete({id:$scope.selected[0].id},function (data) {
+                $scope.nuevo = [];
+                $scope.PuntosVenta.forEach(function (punto) {
+                    if (punto.id != $scope.selected[0].id) $scope.nuevo.push(punto)
+                });
+                $scope.PuntosVenta = $scope.nuevo;
+                $scope.selected = [];
+                Toast.Mensaje('Punto de Expendio Eliminado');
+            },function (err) {
+                Toast.Mensaje('Ocurrió un Error');
+            })
+        });
     };
+
 
     $scope.$watch('selected[0].id', function (data) {
         $scope.stocks = [];
@@ -87,7 +95,7 @@ app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, lista
     }
 });
 
-app.controller('PuntoVentaCreateCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaDepartamento, listaCiudad) {
+app.controller('PuntoVentaCreateCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaDepartamento, listaCiudad, Toast) {
     $scope.departamentos = listaDepartamento.query();
     $scope.punto = {};
 
@@ -112,15 +120,15 @@ app.controller('PuntoVentaCreateCtrl', function ($mdEditDialog, $q, $scope, list
                 cantidad_inicial_vacios:data.cantidad_vacios})
         });
         listaPuntoVenta.save($scope.punto,function (data) {
-            console.log('guardado' + data)
+            Toast.Mensaje('Punto Expendio Creado');
         },function (err) {
-            console.log(err)
+            Toast.Mensaje('Error al Crear Punto Expendio');
         })
     }
 
 });
 
-app.controller('PuntoVentaUpdateCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaDepartamento, listaCiudad, $stateParams, $state) {
+app.controller('PuntoVentaUpdateCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaDepartamento, listaCiudad, $stateParams, $state, Toast) {
     $scope.departamentos = listaDepartamento.query();
 
     $scope.$watch('departamento', function(data) {
@@ -136,23 +144,37 @@ app.controller('PuntoVentaUpdateCtrl', function ($mdEditDialog, $q, $scope, list
 
     $scope.guardar = function () {
         listaPuntoVenta.update({'id':$stateParams.id},$scope.punto,function (data) {
+            Toast.Mensaje('Modificado Correctamente');
             $state.go('puntoVenta_index')
         },function (err) {
-            console.log(err)
+            Toast.Mensaje('Error al Modificar');
         })
     }
 
 });
 
-app.controller('PuntoVentaUpdateStockCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaStock, $stateParams) {
+app.controller('PuntoVentaUpdateStockCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaStock, $stateParams, Toast, $state) {
     $scope.stocksupdate = listaStock.get({'punto_expendio': $stateParams.id})
 
     $scope.guardar = function () {
-        $scope.stocksupdate.forEach(function (stock) {
-            listaStock.update({'id':stock.id}, stock,function (data) {
-            },function (err) {
-                console.log(err)
+        guardado = true;
+        try {
+            $scope.stocksupdate.forEach(function (stock) {
+                listaStock.update({'id':stock.id}, stock,function (data) {
+
+                },function (err) {
+                    guardado = false;
+                    throw BreakException;
+                })
             })
-        })
+        }catch(e){
+
+        }
+        if (guardado){
+            Toast.Mensaje('Modificado Correctamente');
+            $state.go('puntoVenta_index')
+        }else{
+            Toast.Mensaje('Error al modificar');
+        }
     }
 });
