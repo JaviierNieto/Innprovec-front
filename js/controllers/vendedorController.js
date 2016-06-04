@@ -15,7 +15,11 @@ app.controller('VendedorIndexCtrl', function ($mdEditDialog, $scope, listaVended
     };
 
     $scope.vendedores = listaVendedor.query();
-
+    
+    $scope.search = function (valor) {
+        $scope.buscar = valor
+    };
+    
     $scope.eliminar = function () {
         listaVendedor.delete({id:$scope.selected[0].id},function (data) {
             $scope.ven = []
