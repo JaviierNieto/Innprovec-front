@@ -1,0 +1,76 @@
+<div layout="column" flex>
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-primary" ng-show="!selected.length">
+            <div class="md-toolbar-tools" md->
+                <span>Ventas</span>
+                <div flex></div>
+                <md-button  class="md-icon-button md-primary" ui-sref="venta_create"><i class="material-icons">add_shopping_cart </i></md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar md-primary" ng-show="selected.length">
+            <div class="md-toolbar-tools" md->
+                <span>Ventas</span>
+                <div flex></div>
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-table md-row-select="true" ng-model="selected" md-progress="promise">
+                <thead md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column><span>Fecha</span></th>
+                    <th md-column><span>Vendedor</span></th>
+                    <th md-column><span>Punto de Expendio</span></th>
+                    <th md-column><span>Ciudad</span></th>
+                    <th md-column><span>Total</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="venta" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat=" venta in ventas | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ venta.fecha }}</td>
+                    <td md-cell>{{ venta.vendedor.nombres}} {{venta.vendedor.apellidos}}</td>
+                    <td md-cell>{{ venta.punto_expendio.nombre}}</td>
+                    <td md-cell>{{ venta.punto_expendio.ciudad.nombre }} / {{venta.punto_expendio.ciudad.departamento.nombre}}</td>
+                    <td md-cell>{{ venta.total}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{ Ventas.length }}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+
+    </md-card>
+
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-primary" ng-show="selected.length">
+            <div class="md-toolbar-tools">
+                <span>Cilindros de Venta</span>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+
+        <md-table-container ng-show="selected.length">
+            <table md-table>
+                <thead md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column ><span>Categoria</span></th>
+                    <th md-column ><span>Peso</span></th>
+                    <th md-column ><span>Unidades</span></th>
+                    <th md-column ><span>Precio</span></th>
+                    <th md-column ><span>Valor Final</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="deta"  ng-repeat=" deta in detalle | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ deta.cilindro.categoria.nombre }}</td>
+                    <td md-cell>{{ deta.cilindro.tipo.peso }}</td>
+                    <td md-cell>{{ deta.cantidad}}</td>
+                    <td md-cell>{{ deta.precio_unitario}}</td>
+                    <td md-cell>{{deta.precio_unitario * deta.cantidad}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+    </md-card>
+</div>

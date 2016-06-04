@@ -2,6 +2,8 @@ var app = angular.module('inprovec');
 
 app.controller('BodegaIndexCtrl', function ($mdEditDialog, $q, $scope, listaStock) {
 
+    $scope.selected =[];
+
     $scope.query = {
         order: 'categoria.nombre',
         limit: 8,
