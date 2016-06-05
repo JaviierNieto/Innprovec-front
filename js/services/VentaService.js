@@ -15,7 +15,7 @@ function listaVenta($resource, $rootScope) {
     })
 }
 function listaDetalle($resource, $rootScope) {
-    return $resource($rootScope.ruta + '/detalle_ventas/:id/',{},{
+    return $resource($rootScope.ruta + '/detalles_ventas/:id/',{},{
         update:{
             method: 'PUT'
         },

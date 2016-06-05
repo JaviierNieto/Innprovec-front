@@ -9,6 +9,6 @@ app.service('Toast',function ($mdToast) {
                 .position('bottom right')
                 .hideDelay(6000)
         );
-    }
+    };
 
-})
+});

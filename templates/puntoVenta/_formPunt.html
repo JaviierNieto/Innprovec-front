@@ -10,69 +10,71 @@
                 <md-list-item>
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex>
-                            <label>Nombre</label>
+                            <label >Nit</label>
+                            <input ng-model="punto.nit" pattern="[0-9]*" maxlength="20" minlength="8" required>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label >Nombre</label>
                             <input ng-model="punto.nombre" pattern="[A-Za-z]*" maxlength="20" minlength="8" required>
                         </md-input-container>
                         <md-input-container flex>
-                            <label>Telefono</label>
-                            <input ng-model="punto.telefono" pattern="[0-9]*" maxlength="10" minlength="7" required>
+                            <label for="telefono">Telefono</label>
+                            <input type="text" id="telefono" ng-model="punto.telefono" pattern="[0-9]*" maxlength="10" minlength="7" required>
                         </md-input-container>
                         <md-input-container flex>
-                            <label>Direccion</label>
-                            <input ng-model="punto.direccion" required>
+                            <label for="direccion">Direccion</label>
+                            <input type="text" id="direccion" ng-model="punto.direccion" required>
                         </md-input-container>
                     </div>
                 </md-list-item>
-                    <div layout layout-sm="column" class="md-block">
-                        <md-list-item>
-                            <md-select flex placeholder="Seleccione un departamento" ng-model="departamento" >
-                                <md-option ng-value="depar.id" ng-repeat="depar in departamentos">{{depar.nombre}}</md-option>
-                            </md-select>
-                            <md-select flex placeholder="Seleccione una ciudad" ng-model="punto.ciudad" ng-show="departamento!=undefined">
-                                <md-option ng-value="ciu.id" ng-repeat="ciu in ciudades">{{ciu.nombre}}</md-option>
-                            </md-select>
-                        </md-list-item>
+                <div layout layout-sm="column" class="md-block">
+                    <md-list-item>
+                        <md-select flex placeholder="Seleccione un departamento" ng-model="departamento" >
+                            <md-option ng-value="depar.id" ng-repeat="depar in departamentos">{{depar.nombre}}</md-option>
+                        </md-select>
+                        <md-select flex placeholder="Seleccione una ciudad" ng-model="punto.ciudad" ng-show="departamento!=undefined">
+                            <md-option ng-value="ciu.id" ng-repeat="ciu in ciudades">{{ciu.nombre}}</md-option>
+                        </md-select>
+                    </md-list-item>
+                </div>
+            </md-content>
+            <div>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2>Stock Inicial del Punto de Expendio</h2>
                     </div>
+                </md-toolbar>
+                <md-content >
+                        <md-list-item ng-repeat="cilindro in cilindros_nombre">
+                            <div layout layout-sm="column" class="md-block">
+                                <md-input-container flex >
+                                    <label>Categoria</label>
+                                    <input  disabled ng-model="cilindro.categoria">
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Tipo</label>
+                                    <input disabled ng-model="cilindro.tipo">
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Cantidad Llenos</label>
+                                    <input type="number" ng-model="cilindro.cantidad_llenos">
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label for="cantidad">Cantidad Vacios</label>
+                                    <input id="cantidad" type="number" ng-model="cilindro.cantidad_vacios">
+                                </md-input-container>
+                            </div>
+                        </md-list-item>
+                </md-content>
+            </div>
+            <md-content layout="row" layout-align="center center">
+                <div flex="20"></div>
+                <div class="md-padding" layout="row">
+                    <span flex></span>
+                    <md-button ui-sref="puntoVenta_index" class="md-warn"> Cancelar </md-button>
+                    <button class="md-button md-accent" type="submit"> Guardar </button>
+                </div>
             </md-content>
         </form>
-        <div>
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                    <h2>Stock Inicial del Punto de Expendio</h2>
-                </div>
-            </md-toolbar>
-            <md-content class="md-padding" layout="row" layout-align="center center">
-                <form name="userForm">
-                    <md-list-item ng-repeat="cilindro in cilindros_nombre">
-                        <div layout layout-sm="column" class="md-block">
-                            <md-input-container flex >
-                                <label>Categoria</label>
-                                <input disabled ng-model="cilindro.categoria">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Tipo</label>
-                                <input disabled ng-model="cilindro.tipo">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Cantidad Llenos</label>
-                                <input type="number" ng-model="cilindro.cantidad_llenos">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Cantidad Vacios</label>
-                                <input type="number" ng-model="cilindro.cantidad_vacios">
-                            </md-input-container>
-                        </div>
-                    </md-list-item>
-                </form>
-            </md-content>
-        </div>
-        <md-content layout="row" layout-align="center center">
-            <div flex="20"></div>
-            <div class="md-padding" layout="row">
-                <span flex></span>
-                <md-button ui-sref="puntoVenta_index" class="md-warn"> Cancelar </md-button>
-                <button class="md-button md-accent"> Guardar </button>
-            </div>
-        </md-content>
     </md-card>
 </div>

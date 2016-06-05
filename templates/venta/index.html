@@ -1,7 +1,7 @@
 <div layout="column" flex>
     <md-card>
         <md-toolbar class="md-table-toolbar md-primary" ng-show="!selected.length">
-            <div class="md-toolbar-tools" md->
+            <div class="md-toolbar-tools">
                 <span>Ventas</span>
                 <div flex></div>
                 <md-button  class="md-icon-button md-primary" ui-sref="venta_create"><i class="material-icons">add_shopping_cart </i></md-button>
@@ -9,7 +9,7 @@
         </md-toolbar>
 
         <md-toolbar class="md-table-toolbar md-primary" ng-show="selected.length">
-            <div class="md-toolbar-tools" md->
+            <div class="md-toolbar-tools">
                 <span>Ventas</span>
                 <div flex></div>
             </div>
@@ -62,7 +62,7 @@
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row md-select="deta"  ng-repeat=" deta in detalle | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                <tr md-row md-select="deta"  ng-repeat=" deta in detalles | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
                     <td md-cell>{{ deta.cilindro.categoria.nombre }}</td>
                     <td md-cell>{{ deta.cilindro.tipo.peso }}</td>
                     <td md-cell>{{ deta.cantidad}}</td>

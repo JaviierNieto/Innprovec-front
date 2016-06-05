@@ -10,6 +10,9 @@ function listaPuntoVenta($resource, $rootScope) {
     return $resource($rootScope.ruta + '/puntos_expendio/:id/',{},{
         update:{
             method: 'PUT'
+        },
+        get: {
+            isArray: true
         }
     })
 }

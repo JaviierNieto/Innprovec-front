@@ -1,0 +1,89 @@
+<div layout="row" layout-xs="column" layout-align="center center">
+    <md-card>
+        <md-toolbar>
+            <div class="md-toolbar-tools" layout-align="center center">
+                <h2>Nueva Venta</h2>
+            </div>
+        </md-toolbar>
+        <form ng-submit="guardar()">
+            <md-content>
+                <md-list-item>
+                    <div layout layout-sm="column" class="md-block">
+                        <md-input-container flex class="md-icon-float md-block">
+                            <label for="identificacion_vendedor">Cédula del Vendedor</label>
+                            <input id="identificacion_vendedor" ng-model="vendedor.cedula" required>
+                            <md-icon><a class="manito" ng-click="buscar_vendedor()"><i class="material-icons">search</i></a></md-icon>
+                        </md-input-container>
+                        <div ng-show="vendedor_encontrado">
+                            <md-input-container flex>
+                                <label for="nombre_vendedor">Nombre del vendedor</label>
+                                <input id="nombre_vendedor" ng-model="vendedor.nombres" required disabled>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Telefono</label>
+                                <input ng-model="vendedor.telefono" required disabled>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </md-list-item>
+
+                <md-list-item>
+                    <div layout layout-sm="column" class="md-block">
+                        <md-input-container flex class="md-icon-float md-block">
+                            <label >Nit del punto de expendio</label>
+                            <input ng-model="punto.nit" required>
+                            <md-icon><a class="manito" ng-click="buscar_punto()"><i class="material-icons md-icon md-primary">search</i></a></md-icon>
+                        </md-input-container>
+                        <div ng-show="punto_encontrado">
+                            <md-input-container flex>
+                                <label>Nombre del punto</label>
+                                <input ng-model="punto.nombre" required disabled>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Direccion del punto</label>
+                                <input ng-model="punto.direccion" required disabled>
+                            </md-input-container>
+                        </div>
+
+                    </div>
+                </md-list-item>
+            </md-content>
+            <div>
+                <md-toolbar>
+                    <div class="md-toolbar-tools" layout-align="center center">
+                        <h2>Cilindros Vendidos</h2>
+                    </div>
+                </md-toolbar>
+                <md-content >
+                        <md-list-item ng-repeat="cilindro in cilindros">
+                            <div layout layout-sm="column" class="md-block">
+                                <md-input-container flex >
+                                    <label>Categoria</label>
+                                    <input disabled ng-model="cilindro.categoria">
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Tipo</label>
+                                    <input disabled ng-model="cilindro.tipo">
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Cantidad</label>
+                                    <input type="number"  ng-model="cilindro.cantidad">
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Precio Unitario</label>
+                                    <input type="number" ng-model="cilindro.precio_unitario">
+                                </md-input-container>
+                            </div>
+                        </md-list-item>
+                </md-content>
+            </div>
+
+            <md-content layout="row" layout-align="end center">
+                <div class="md-padding" layout="row">
+                    <md-button ui-sref="puntoVenta_index" class="md-warn"> Cancelar </md-button>
+                    <input class="md-button md-accent" type="submit" value="Guardar">
+                </div>
+            </md-content>
+        </form>
+    </md-card>
+</div>

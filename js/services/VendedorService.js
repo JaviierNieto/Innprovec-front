@@ -9,6 +9,9 @@ function listaVendedor($resource, $rootScope) {
     return $resource($rootScope.ruta + '/vendedores/:id/',{},{
         update:{
             method: 'PUT'
+        },
+        get:{
+            isArray: true
         }
     })
 }
