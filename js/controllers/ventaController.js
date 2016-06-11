@@ -36,6 +36,7 @@ app.controller('VentaIndexCtrl', function ($mdEditDialog, $scope, listaVenta, li
 app.controller('VentaCreateCtrl', function ($mdEditDialog, $scope, listaVenta, listaVendedor, listaPuntoVenta, Toast) {
     vendedor = {};
 
+
     $scope.cilindros = [
         {categoria: 'Cilindro', tipo: 15, cilindro: 1, precio_unitario: 0, cantidad: 0, total: 0},
         {categoria: 'Cilindro', tipo: 18, cilindro: 2, precio_unitario: 0, cantidad: 0, total: 0},
@@ -79,7 +80,7 @@ app.controller('VentaCreateCtrl', function ($mdEditDialog, $scope, listaVenta, l
                 $scope.vendedor.id = data[0].id;
                 $scope.vendedor_encontrado = true;
             } else {
-                console.log('vendedor no encontrado')
+                Toast.Mensaje('vendedor no encontrado');
             }
         });
     };
@@ -92,7 +93,7 @@ app.controller('VentaCreateCtrl', function ($mdEditDialog, $scope, listaVenta, l
                 $scope.punto.id = data[0].id;
                 $scope.punto_encontrado = true;
             } else {
-                console.log('Punto no encontrado')
+                Toast.Mensaje('Punto no encontrado');
             }
         });
     };
@@ -104,18 +105,19 @@ app.controller('VentaCreateCtrl', function ($mdEditDialog, $scope, listaVenta, l
         return ($scope.venta.vendedor != undefined && $scope.venta.punto_expendio != undefined &&
         $scope.venta.cilindros.length > 0);
     };
+    
 
     $scope.venta.total = 0;
 
     $scope.crear_venta = function () {
-        $scope.venta.punto_expendio = $scope.punto.id
-        $scope.venta.vendedor = $scope.vendedor.id
+        $scope.venta.punto_expendio = $scope.punto.id;
+        $scope.venta.vendedor = $scope.vendedor.id;
 
         $scope.cilindros.forEach(function (data) {
             if (data.cantidad > 0 && data.precio_unitario > 0) {
                 $scope.venta.cilindros.push({
                     cilindro: data.cilindro, cantidad: data.cantidad,
-                    precio_unitario: data.precio_unitario,
+                    precio_unitario: data.precio_unitario
                 });
                 $scope.venta.total += (data.cantidad * data.precio_unitario)
             }

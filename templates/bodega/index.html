@@ -2,9 +2,76 @@
     <md-card>
         <md-toolbar class="md-table-toolbar md-primary">
             <div class="md-toolbar-tools" md->
-                <span>Bodega de Cilindros</span>
+                <span>Cilindros Bodega General</span>
                 <div flex></div>
-                <md-button class="md-icon-button md-primary" ng-show="res" ng-click="respaldar($event)"><i class="material-icons">backup</i></md-button>
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-table  ng-model="selected" md-progress="promise">
+                <thead md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column><span>categoria</span></th>
+                    <th md-column><span>Tipo</span></th>
+                    <th md-column><span>Cantidad Vacios</span></th>
+                    <th md-column><span>Cantidad Llenos</span></th>
+                    <th md-column><span>Total</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="bode" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bode in general | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ bode.Categoria }}</td>
+                    <td md-cell>{{ bode.Tipo }}</td>
+                    <td md-cell>{{ bode.cantidad_vacios }}</td>
+                    <td md-cell>{{ bode.cantidad_llenos }}</td>
+                    <td md-cell>{{ bode.cantidad_llenos + bode.cantidad_vacios }}</td>
+                </tbody>
+            </table>
+        </md-table-container>
+
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{ bodegas.length }}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+
+    </md-card>
+
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-primary">
+            <div class="md-toolbar-tools" md->
+                <span>Cilindros Bodega</span>
+                <div flex></div>
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-table  ng-model="selected" md-progress="promise">
+                <thead md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column><span>categoria</span></th>
+                    <th md-column><span>Tipo</span></th>
+                    <th md-column><span>Cantidad Vacios</span></th>
+                    <th md-column><span>Cantidad Llenos</span></th>
+                    <th md-column><span>Total</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="bodega" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bodega in bodegas | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ bodega.cilindro.categoria.nombre  }}</td>
+                    <td md-cell>{{ bodega.cilindro.tipo.peso  }}</td>
+                    <td md-cell>{{ bodega.cantidad_total_vacios }}</td>
+                    <td md-cell>{{ bodega.cantidad_total_llenos }}</td>
+                    <td md-cell>{{ bodega.cantidad_total_llenos + bodega.cantidad_total_vacios }}</td>
+                </tbody>
+            </table>
+        </md-table-container>
+
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{ bodegas.length }}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+
+    </md-card>
+
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-primary">
+            <div class="md-toolbar-tools" md->
+                <span>Cilindros Puntos Expnedios</span>
+                <div flex></div>
             </div>
         </md-toolbar>
 
