@@ -1,7 +1,6 @@
 var app = angular.module("inprovec");
 
 app.config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/");
     $stateProvider
         .state('puntoVenta_index',{
             url: '/puntoVenta/',

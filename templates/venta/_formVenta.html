@@ -10,6 +10,16 @@
                 <md-list-item>
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex class="md-icon-float md-block">
+                            <label for="fecha">Fecha de la venta</label>
+                            <input id="fecha" type="date" ng-model="venta.fecha" required>
+                        </md-input-container>
+                    </div>
+                </md-list-item>
+
+
+                <md-list-item>
+                    <div layout layout-sm="column" class="md-block">
+                        <md-input-container flex class="md-icon-float md-block">
                             <label for="identificacion_vendedor">Cédula del Vendedor</label>
                             <input id="identificacion_vendedor" ng-model="vendedor.cedula" required>
                             <md-icon><a class="manito" ng-click="buscar_vendedor()"><i class="material-icons">search</i></a></md-icon>
