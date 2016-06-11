@@ -138,4 +138,6 @@ app.controller('VentaCreateCtrl', function ($mdEditDialog, $scope, listaVenta, l
         }
     }
 
+    
+
 });
