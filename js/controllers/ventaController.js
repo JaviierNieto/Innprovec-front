@@ -5,7 +5,11 @@ app.controller('VentaIndexCtrl', function ($mdEditDialog, $scope, listaVenta, li
     $scope.selected = [];
 
     $scope.options = {
-        autoSelect: true
+        autoSelect: true,
+        vendedor: false,
+        mes: false,
+        puntoEx: false,
+        fecha: false
     };
 
     $scope.query = {
@@ -139,5 +143,58 @@ app.controller('VentaCreateCtrl', function ($mdEditDialog, $scope, listaVenta, l
     }
 
     
+
+});
+app.controller('VentaSearchCtrl', function ($mdEditDialog, $scope, listaVenta, listaVendedor, listaPuntoVenta, Toast) {
+
+    vendedor = {};
+    punto = {};
+
+    $scope.$watch('vendedor.cedula', function (data) {
+        try {
+            $scope.vendedor.nombres = null;
+            $scope.vendedor.telefono = null;
+            $scope.vendedor.id = null;
+            $scope.vendedor_encontrado = false;
+        } catch (e) {
+
+        }
+    });
+
+    $scope.$watch('punto.nit', function (data) {
+        try {
+            $scope.punto.direccion = null;
+            $scope.punto.ciudad = null;
+            $scope.punto.id = null;
+            $scope.punto_encontrado = false;
+        } catch (e) {
+
+        }
+    });
+    $scope.buscar_vendedor = function () {
+        listaVendedor.get({'cedula': $scope.vendedor.cedula}, function (data) {
+            if (data[0] != undefined) {
+                $scope.vendedor.nombres = data[0].nombres;
+                $scope.vendedor.telefono = data[0].telefono;
+                $scope.vendedor.id = data[0].id;
+                $scope.vendedor_encontrado = true;
+            } else {
+                Toast.Mensaje('vendedor no encontrado');
+            }
+        });
+    };
+
+    $scope.buscar_punto = function () {
+        listaPuntoVenta.get({'nit': $scope.punto.nit}, function (data) {
+            if (data[0] != undefined) {
+                $scope.punto.nombre = data[0].nombre;
+                $scope.punto.direccion = data[0].direccion;
+                $scope.punto.id = data[0].id;
+                $scope.punto_encontrado = true;
+            } else {
+                Toast.Mensaje('Punto no encontrado');
+            }
+        });
+    };
 
 });

@@ -12,5 +12,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/venta/_formVenta.html',
             controller: 'VentaCreateCtrl'
         })
+        .state('venta_search',{
+            url: '/venta/search',
+            templateUrl: 'templates/venta/_formSearch.html',
+            controller: 'VentaSearchCtrl'
+        })
 
 });

@@ -87,12 +87,12 @@
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row md-select="bodega" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="bodega in bodegas | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                    <td md-cell>{{ bodega.cilindro.categoria.nombre  }}</td>
-                    <td md-cell>{{ bodega.cilindro.tipo.peso  }}</td>
-                    <td md-cell>{{ bodega.cantidad_total_vacios }}</td>
-                    <td md-cell>{{ bodega.cantidad_total_llenos }}</td>
-                    <td md-cell>{{ bodega.cantidad_total_llenos + bodega.cantidad_total_vacios }}</td>
+                <tr md-row md-select="punto" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="punto in puntos | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ punto.Categoria  }}</td>
+                    <td md-cell>{{ punto.Tipo  }}</td>
+                    <td md-cell>{{ punto.cantidad_vacios }}</td>
+                    <td md-cell>{{ punto.cantidad_llenos }}</td>
+                    <td md-cell>{{ punto.cantidad_llenos + punto.cantidad_vacios }}</td>
                 </tbody>
             </table>
         </md-table-container>

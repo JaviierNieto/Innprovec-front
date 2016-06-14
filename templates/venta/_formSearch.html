@@ -2,13 +2,20 @@
     <md-card>
         <md-toolbar>
             <div class="md-toolbar-tools" layout-align="center center">
-                <h2>Nueva Venta</h2>
+                <h2>Seleccione busqueda a realizar</h2>
             </div>
         </md-toolbar>
-        <form ng-submit="guardar()">
+        <form ng-submit="">
             <md-content>
-                <md-datepicker id="fecha" ng-model="venta.fecha" md-placeholder="Fecha de Venta"></md-datepicker>
-                <md-list-item>
+                <md-card>
+                    <div layout="row" class="checkboxes">
+                        <md-checkbox ng-model="options.vendedor">por Vendedor</md-checkbox>
+                        <md-checkbox ng-model="options.puntoEx">por Punto Expendio</md-checkbox>
+                        <md-checkbox ng-model="options.mes">por Mes</md-checkbox>
+                        <md-checkbox ng-model="options.fecha">por Fecha Exacta</md-checkbox>
+                    </div>
+                </md-card>
+                <md-list-item ng-show="options.vendedor">
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex class="md-icon-float md-block">
                             <label for="identificacion_vendedor">Cédula del Vendedor</label>
@@ -28,7 +35,7 @@
                     </div>
                 </md-list-item>
 
-                <md-list-item>
+                <md-list-item ng-show="options.puntoEx">
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex class="md-icon-float md-block">
                             <label >Nit del punto de expendio</label>
@@ -48,43 +55,40 @@
 
                     </div>
                 </md-list-item>
-            </md-content>
-            <div>
-                <md-toolbar>
-                    <div class="md-toolbar-tools" layout-align="center center">
-                        <h2>Cilindros Vendidos</h2>
-                    </div>
-                </md-toolbar>
-                <md-content >
-                        <md-list-item ng-repeat="cilindro in cilindros">
-                            <div layout layout-sm="column" class="md-block">
-                                <md-input-container flex >
-                                    <label>Categoria</label>
-                                    <input disabled ng-model="cilindro.categoria">
-                                </md-input-container>
-                                <md-input-container flex>
-                                    <label>Tipo</label>
-                                    <input disabled ng-model="cilindro.tipo">
-                                </md-input-container>
-                                <md-input-container flex>
-                                    <label>Cantidad</label>
-                                    <input type="number"  ng-model="cilindro.cantidad">
-                                </md-input-container>
-                                <md-input-container flex>
-                                    <label>Precio Unitario</label>
-                                    <input type="number" ng-model="cilindro.precio_unitario">
-                                </md-input-container>
-                            </div>
-                        </md-list-item>
-                </md-content>
-            </div>
 
-            <md-content layout="row" layout-align="end center">
+                <md-list-item ng-show="options.mes">
+                    <div layout layout-sm="column" class="md-block">
+                        <md-input-container flex class="md-block">
+                            <label >Fecha de Inicio</label>
+                            <input type="date" required>
+                        </md-input-container>
+                        <div>
+                            <md-input-container flex>
+                                <label>Fecha Final</label>
+                                <input type="date" required>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </md-list-item>
+
+                <md-list-item ng-show="options.fecha">
+                    <div layout layout-sm="column" class="md-block">
+                        <md-input-container flex class="md-block">
+                            <label >Fecha de venta</label>
+                            <input type="date" required>
+                        </md-input-container>
+                    </div>
+                </md-list-item>
+
+            </md-content>
+
+            <md-content layout="row" layout-align="end center" ng-show="options.mes || options.fecha || options.puntoEx || options.vendedor">
                 <div class="md-padding" layout="row">
-                    <md-button ui-sref="puntoVenta_index" class="md-warn"> Cancelar </md-button>
-                    <input class="md-button md-accent" type="submit" value="Guardar">
+                    <md-button ui-sref="venta_index" class="md-warn"> Cancelar </md-button>
+                    <input class="md-button md-accent" type="submit" value="Filtrar">
                 </div>
             </md-content>
+
         </form>
     </md-card>
 </div>
