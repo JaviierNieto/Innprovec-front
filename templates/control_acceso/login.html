@@ -1,0 +1,22 @@
+<div layout="row" layout-align="center center" class="login-form">
+    <md-content class="md-whiteframe-15dp">
+        <h1>Control de Acceso</h1>
+        <form>
+            <div class="text-fields" layout="column">
+                <md-input-container class="md-icon-float md-block">
+                    <label>Correo</label>
+                    <md-icon><i class="material-icons">mail_outline</i></md-icon>
+                    <input type="text" name="username" ng-model="username">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Contraseña</label>
+                    <md-icon><i class="material-icons">lock_outline</i></md-icon>
+                    <input type="password" name="password" ng-model="password">
+                </md-input-container>
+            </div>
+            <div class="form-buttons" layout="column">
+                <md-button ng-click="iniciar()" class="md-raised md-primary">Ingresar</md-button>
+            </div>
+        </form>
+    </md-content>
+</div>

@@ -1,7 +1,7 @@
-var app = angular.module("inprovec",['ngMaterial', 'ui.router', 'ngResource', 'md.data.table']);
+var app = angular.module("inprovec",['ngMaterial', 'ui.router', 'ngResource', 'md.data.table', 'LocalStorageModule']);
 
 
-app.config(function($mdThemingProvider, $httpProvider, $resourceProvider) {
+app.config(function($mdThemingProvider, $httpProvider, $resourceProvider, localStorageServiceProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('teal')
         .accentPalette('blue')
@@ -13,29 +13,20 @@ app.config(function($mdThemingProvider, $httpProvider, $resourceProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
     $resourceProvider.defaults.stripTrailingSlashes = false;
-});
-app.config(function($mdDateLocaleProvider) {
-    // Example of a Spanish localization.
-    $mdDateLocaleProvider.months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-    $mdDateLocaleProvider.shortMonths = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-        'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-    $mdDateLocaleProvider.days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'];
-    $mdDateLocaleProvider.shortDays = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
-    // Can change week display to start on Monday.
-    $mdDateLocaleProvider.firstDayOfWeek = 1;
-    // Optional.
-    //$mdDateLocaleProvider.dates = [1, 2, 3, 4, 5, 6, 7,8,9,10,11,12,13,14,15,16,17,18,19,
-    //                               20,21,22,23,24,25,26,27,28,29,30,31];
-    // In addition to date display, date components also need localized messages
-    // for aria-labels for screen-reader users.
-    $mdDateLocaleProvider.weekNumberFormatter = function(weekNumber) {
-        return 'Semana ' + weekNumber;
-    };
-    $mdDateLocaleProvider.msgCalendar = 'Calendario';
-    $mdDateLocaleProvider.msgOpenCalendar = 'Abrir calendario';
+
+    localStorageServiceProvider.setPrefix('User');
+
 });
 
-app.run(function ($rootScope) {
+app.run(function ($rootScope, localStorageService, $state) {
     $rootScope.ruta = 'http://api-ing.herokuapp.com';
+    $rootScope.usuario = localStorageService.get('User')
+    $rootScope.inicio = function () {
+        if (!$rootScope.usuario){
+            $state.go('login');
+            $rootScope.ver = false
+        }else{
+            $rootScope.ver = true
+        }
+    };
 });

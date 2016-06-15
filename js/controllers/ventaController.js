@@ -1,7 +1,7 @@
 var app = angular.module('inprovec');
 
 app.controller('VentaIndexCtrl', function ($mdEditDialog, $scope, listaVenta, listaDetalle) {
-
+    $scope.inicio()
     $scope.selected = [];
 
     $scope.options = {
@@ -38,8 +38,8 @@ app.controller('VentaIndexCtrl', function ($mdEditDialog, $scope, listaVenta, li
 });
 
 app.controller('VentaCreateCtrl', function ($mdEditDialog, $scope, listaVenta, Vendedores, listaPuntoVenta, Toast) {
+    $scope.inicio()
     vendedor = {};
-
 
     $scope.cilindros = [
         {categoria: 'Cilindro', tipo: 15, cilindro: 1, precio_unitario: 0, cantidad: 0, total: 0},
@@ -146,6 +146,7 @@ app.controller('VentaCreateCtrl', function ($mdEditDialog, $scope, listaVenta, V
 
 });
 app.controller('VentaSearchCtrl', function ($mdEditDialog, $scope, Ventas, Toast) {
+    $scope.inicio()
     $scope.search = {};
     $scope.exito = false;
 

@@ -1,7 +1,7 @@
 var app = angular.module('inprovec');
 
 app.controller('BodegaIndexCtrl', function ($mdEditDialog, $q, $scope, listaStock, listaRespaldo, Toast, $mdDialog) {
-
+    $scope.inicio()
     $scope.selected =[];
 
     $scope.query = {

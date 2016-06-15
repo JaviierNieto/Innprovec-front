@@ -14,22 +14,11 @@
                     <i class="material-icons security">security</i>Admin
                 </span>
             </div>
-            <md-menu md-offset="0 - 7">
-                <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-                    <i class="material-icons">more_vert</i>
-                </md-button>
-                <md-menu-content md-whiteframe="2" width="2" md-position-mode="target-right target">
-                    <md-menu-item>
-                        <md-button>
-                            <span> Modificar Usuario</span>
-                        </md-button>
-                    </md-menu-item><md-menu-item>
-                    <md-button>
-                        <span> Cerrar Sesion</span>
-                    </md-button>
-                </md-menu-item>
-                </md-menu-content>
-            </md-menu>
+            <div layout="column" ng-click="cerrraSession()" class="manito">
+                <span class="role">
+                    <i class="material-icons">lock_outline</i>
+                </span>
+            </div>
 
         </div>
     </md-toolbar>

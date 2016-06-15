@@ -1,6 +1,7 @@
 var app = angular.module('inprovec');
 
 app.controller('VendedorIndexCtrl', function ($mdEditDialog, $scope, listaVendedor, $mdDialog, Toast) {
+    $scope.inicio()
     $scope.selected = [];
 
     $scope.options = {
@@ -51,6 +52,7 @@ app.controller('VendedorIndexCtrl', function ($mdEditDialog, $scope, listaVended
 });
 
 app.controller('VendedorCreateCtrl', function ($mdEditDialog, $scope, listaVendedor, Toast) {
+    $scope.inicio()
     $scope.guardarVendedor = function () {
         listaVendedor.save($scope.vendedor,function (data) {
             $scope.vendedor = {};
@@ -62,6 +64,7 @@ app.controller('VendedorCreateCtrl', function ($mdEditDialog, $scope, listaVende
 });
 
 app.controller('VendedorUpdateCtrl', function ($mdEditDialog, $scope, listaVendedor, $stateParams, $state, Toast) {
+    $scope.inicio()
     $scope.vendedor = listaVendedor.get({id:$stateParams.id});
     $scope.guardarVendedor = function () {
         listaVendedor.update({id:$stateParams.id},$scope.vendedor,function (data) {

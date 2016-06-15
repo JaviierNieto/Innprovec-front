@@ -1,7 +1,7 @@
 
 var app = angular.module('inprovec');
 
-app.controller('sidenavCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+app.controller('sidenavCtrl', function ($scope, $timeout, $mdSidenav, $log, localStorageService, $state, $rootScope) {
         $scope.toggleLeft = buildDelayedToggler('left');
         $scope.isOpenRight = function(){
             return $mdSidenav('right').isOpen();
@@ -29,6 +29,13 @@ app.controller('sidenavCtrl', function ($scope, $timeout, $mdSidenav, $log) {
                     });
             }, 200);
         }
+
+        $scope.cerrraSession = function () {
+            $rootScope.usuario = null
+            localStorageService.remove('User')
+            $state.go('login');
+        }
+
     })
     .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log, MenuService) {
         $scope.views = MenuService.getViews();

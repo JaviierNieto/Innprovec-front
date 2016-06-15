@@ -1,7 +1,9 @@
 var app = angular.module('inprovec');
 
 app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaStock, $mdDialog, Toast) {
-
+    
+    $scope.inicio()
+    
     $scope.selected = [];
 
     $scope.options = {
@@ -95,6 +97,7 @@ app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, lista
 });
 
 app.controller('PuntoVentaCreateCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaDepartamento, listaCiudad, Toast) {
+    $scope.inicio()
     $scope.departamentos = listaDepartamento.query();
     $scope.punto = {};
 
@@ -131,6 +134,7 @@ app.controller('PuntoVentaCreateCtrl', function ($mdEditDialog, $q, $scope, list
 
 app.controller('PuntoVentaUpdateCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaDepartamento,
                                                  listaCiudad, $stateParams, $state, Toast) {
+    $scope.inicio()
     $scope.departamentos = listaDepartamento.query();
 
     $scope.$watch('departamento', function (data) {
@@ -156,6 +160,7 @@ app.controller('PuntoVentaUpdateCtrl', function ($mdEditDialog, $q, $scope, list
 });
 
 app.controller('PuntoVentaUpdateStockCtrl', function ($mdEditDialog, $q, $scope, listaPuntoVenta, listaStock, $stateParams, Toast, $state) {
+    $scope.inicio()
     $scope.stocksupdate = listaStock.get({'punto_expendio': $stateParams.id})
 
     $scope.guardar = function () {
