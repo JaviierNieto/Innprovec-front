@@ -11,11 +11,11 @@
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex>
                             <label >Nit</label>
-                            <input ng-model="punto.nit" pattern="[0-9]*" maxlength="20" minlength="8" required>
+                            <input ng-model="punto.nit" pattern="[0-9-]*" maxlength="20" minlength="8" required>
                         </md-input-container>
                         <md-input-container flex>
                             <label >Nombre</label>
-                            <input ng-model="punto.nombre" pattern="[A-Za-z]*" maxlength="20" minlength="8" required>
+                            <input ng-model="punto.nombre" pattern="[A-Za-z ]*" maxlength="20" minlength="8" required>
                         </md-input-container>
                         <md-input-container flex>
                             <label for="telefono">Telefono</label>
@@ -29,10 +29,10 @@
                 </md-list-item>
                 <div layout layout-sm="column" class="md-block">
                     <md-list-item>
-                        <md-select flex placeholder="Seleccione un departamento" ng-model="departamento" >
+                        <md-select flex placeholder="Seleccione un departamento" ng-model="departamento">
                             <md-option ng-value="depar.id" ng-repeat="depar in departamentos">{{depar.nombre}}</md-option>
                         </md-select>
-                        <md-select flex placeholder="Seleccione una ciudad" ng-model="punto.ciudad" ng-show="departamento!=undefined">
+                        <md-select flex placeholder="Seleccione una ciudad" ng-model="punto.ciudad" ng-show="departamento!=undefined" required>
                             <md-option ng-value="ciu.id" ng-repeat="ciu in ciudades">{{ciu.nombre}}</md-option>
                         </md-select>
                     </md-list-item>

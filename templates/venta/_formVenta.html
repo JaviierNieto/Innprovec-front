@@ -12,7 +12,7 @@
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex class="md-icon-float md-block">
                             <label for="identificacion_vendedor">Cédula del Vendedor</label>
-                            <input id="identificacion_vendedor" ng-model="vendedor.cedula" required>
+                            <input id="identificacion_vendedor" ng-model="vendedor.cedula" required pattern="[0-9]*" minlength="8" maxlength="10">
                             <md-icon><a class="manito" ng-click="buscar_vendedor()"><i class="material-icons">search</i></a></md-icon>
                         </md-input-container>
                         <div ng-show="vendedor_encontrado">
@@ -32,7 +32,7 @@
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex class="md-icon-float md-block">
                             <label >Nit del punto de expendio</label>
-                            <input ng-model="punto.nit" required>
+                            <input ng-model="punto.nit" required pattern="[0-9-]*" minlength="8" maxlength="20">
                             <md-icon><a class="manito" ng-click="buscar_punto()"><i class="material-icons md-icon md-primary">search</i></a></md-icon>
                         </md-input-container>
                         <div ng-show="punto_encontrado">

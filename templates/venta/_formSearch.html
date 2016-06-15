@@ -1,37 +1,31 @@
-<div layout="row" layout-xs="column" layout-align="center center">
+<div layout="row" layout-xs="column" layout-align="center center" ng-show="!exito">
     <md-card>
         <md-toolbar>
             <div class="md-toolbar-tools" layout-align="center center">
                 <h2>Seleccione busqueda a realizar</h2>
             </div>
         </md-toolbar>
-        <form ng-submit="">
+        <form ng-submit="filtar()" novalidate>
             <md-content>
-                <md-card>
-                    <div layout="row" class="checkboxes">
+                    <div layout="row" class="checkboxes search">
                         <md-checkbox ng-model="options.vendedor">por Vendedor</md-checkbox>
                         <md-checkbox ng-model="options.puntoEx">por Punto Expendio</md-checkbox>
-                        <md-checkbox ng-model="options.mes">por Mes</md-checkbox>
-                        <md-checkbox ng-model="options.fecha">por Fecha Exacta</md-checkbox>
+                        <md-checkbox ng-model="options.fecha">por Fecha</md-checkbox>
                     </div>
-                </md-card>
+                    <div layout="row" class="checkboxes search2">
+                        <md-checkbox ng-model="options.fecha_mayor">por Fecha Mayor a:</md-checkbox>
+                        <md-checkbox ng-model="options.fecha_menor">por Fecha menor a:</md-checkbox>
+                    </div>
+                <div layout="row" class="checkboxes search2">
+                        <md-checkbox ng-model="options.precio_mayor">por Precio Mayor a:</md-checkbox>
+                        <md-checkbox ng-model="options.precio_menor">por Precio menor a:</md-checkbox>
+                    </div>
                 <md-list-item ng-show="options.vendedor">
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex class="md-icon-float md-block">
-                            <label for="identificacion_vendedor">Cédula del Vendedor</label>
-                            <input id="identificacion_vendedor" ng-model="vendedor.cedula" required>
-                            <md-icon><a class="manito" ng-click="buscar_vendedor()"><i class="material-icons">search</i></a></md-icon>
+                            <label for="vendedor">Cédula del Vendedor</label>
+                            <input id="vendedor" ng-model="search.Cedula_Vendedor">
                         </md-input-container>
-                        <div ng-show="vendedor_encontrado">
-                            <md-input-container flex>
-                                <label for="nombre_vendedor">Nombre del vendedor</label>
-                                <input id="nombre_vendedor" ng-model="vendedor.nombres" required disabled>
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Telefono</label>
-                                <input ng-model="vendedor.telefono" required disabled>
-                            </md-input-container>
-                        </div>
                     </div>
                 </md-list-item>
 
@@ -39,35 +33,26 @@
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex class="md-icon-float md-block">
                             <label >Nit del punto de expendio</label>
-                            <input ng-model="punto.nit" required>
-                            <md-icon><a class="manito" ng-click="buscar_punto()"><i class="material-icons md-icon md-primary">search</i></a></md-icon>
+                            <input ng-model="search.Nit_punto_expendio">
                         </md-input-container>
-                        <div ng-show="punto_encontrado">
-                            <md-input-container flex>
-                                <label>Nombre del punto</label>
-                                <input ng-model="punto.nombre" required disabled>
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Direccion del punto</label>
-                                <input ng-model="punto.direccion" required disabled>
-                            </md-input-container>
-                        </div>
-
                     </div>
                 </md-list-item>
 
-                <md-list-item ng-show="options.mes">
+                <md-list-item ng-show="options.fecha_mayor">
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex class="md-block">
-                            <label >Fecha de Inicio</label>
-                            <input type="date" required>
+                            <label >Fecha de Mayor a</label>
+                            <input type="date" ng-model="fecha.fecha_inicial">
                         </md-input-container>
-                        <div>
-                            <md-input-container flex>
-                                <label>Fecha Final</label>
-                                <input type="date" required>
-                            </md-input-container>
-                        </div>
+                    </div>
+                </md-list-item>
+
+                <md-list-item ng-show="options.fecha_menor">
+                    <div layout layout-sm="column" class="md-block">
+                        <md-input-container flex>
+                            <label>Fecha Menor a</label>
+                            <input type="date" ng-model="fecha.fecha_final">
+                        </md-input-container>
                     </div>
                 </md-list-item>
 
@@ -75,20 +60,75 @@
                     <div layout layout-sm="column" class="md-block">
                         <md-input-container flex class="md-block">
                             <label >Fecha de venta</label>
-                            <input type="date" required>
+                            <input type="date" ng-model="fecha.fecha">
+                        </md-input-container>
+                    </div>
+                </md-list-item>
+
+                <md-list-item ng-show="options.precio_mayor">
+                    <div layout layout-sm="column" class="md-block">
+                        <md-input-container flex>
+                            <label>Precio Mayor a</label>
+                            <input type="number" ng-model="search.mayor_venta">
+                        </md-input-container>
+                    </div>
+                </md-list-item>
+
+                <md-list-item ng-show="options.precio_menor">
+                    <div layout layout-sm="column" class="md-block">
+                        <md-input-container flex class="md-block">
+                            <label >Precio Menor a</label>
+                            <input type="number" ng-model="search.menor_venta">
                         </md-input-container>
                     </div>
                 </md-list-item>
 
             </md-content>
 
-            <md-content layout="row" layout-align="end center" ng-show="options.mes || options.fecha || options.puntoEx || options.vendedor">
+            <md-content layout="row" layout-align="end center" ng-show="options.fecha || options.fecha_mayor || options.fecha_menor || options.precio_mayor || options.precio_menor || options.puntoEx || options.vendedor">
                 <div class="md-padding" layout="row">
                     <md-button ui-sref="venta_index" class="md-warn"> Cancelar </md-button>
-                    <input class="md-button md-accent" type="submit" value="Filtrar">
+                    <input class="md-button md-accent" type="submit" value="Filtar">
                 </div>
             </md-content>
-
         </form>
+    </md-card>
+</div>
+<div layout="row" layout-xs="column" layout-align="center center" ng-show="exito">
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-primary">
+            <div class="md-toolbar-tools">
+                <span>Resultados</span>
+                <div flex></div>
+            </div>
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-table md-row-select="true" ng-model="selected" md-progress="promise">
+                <thead md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column><span>Fecha</span></th>
+                    <th md-column><span>Vendedor</span></th>
+                    <th md-column><span>Punto de Expendio</span></th>
+                    <th md-column><span>Ciudad</span></th>
+                    <th md-column><span>Total</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="venta" md-on-select="logItem" ng-repeat=" venta in ventas | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{ venta.fecha }}</td>
+                    <td md-cell>{{ venta.vendedor.nombres}} {{venta.vendedor.apellidos}}</td>
+                    <td md-cell>{{ venta.punto_expendio.nombre}}</td>
+                    <td md-cell>{{ venta.punto_expendio.ciudad.nombre }} / {{venta.punto_expendio.ciudad.departamento.nombre}}</td>
+                    <td md-cell>{{ venta.total}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <md-content layout="row" layout-align="end center">
+            <div class="md-padding" layout="row">
+                <md-button class="md-warn" ng-click="atras()"> Volver a Filtrar </md-button>
+            </div>
+        </md-content>
     </md-card>
 </div>

@@ -28,7 +28,7 @@
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row md-select="venta" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat=" venta in ventas | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                <tr class="manito" md-row md-select="venta" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat=" venta in ventas | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
                     <td md-cell>{{ venta.fecha }}</td>
                     <td md-cell>{{ venta.vendedor.nombres}} {{venta.vendedor.apellidos}}</td>
                     <td md-cell>{{ venta.punto_expendio.nombre}}</td>

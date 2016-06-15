@@ -22,20 +22,19 @@ app.controller('PuntoVentaIndexCtrl', function ($mdEditDialog, $q, $scope, lista
         $scope.buscar = valor;
     };
 
-    /*
      $scope.PuntosVenta = []
 
      $scope.PuntosVentas = function () {
-     $scope.busqueda = listaPuntoVenta.query({},function (punto) {
-     punto.forEach(function (data) {
-     if (data.id > 2) $scope.PuntosVenta.push(data)
-     })
-     });
-     }
-     $scope.PuntosVentas();*/
+         $scope.busqueda = listaPuntoVenta.query({},function (punto) {
+             punto.forEach(function (data) {
+                if (data.id > 1) $scope.PuntosVenta.push(data)
+             })
+         });
+     };
+
+     $scope.PuntosVentas();
 
     $scope.stocksGeneral = listaStock.query();
-    $scope.PuntosVenta = listaPuntoVenta.query();
 
     $scope.showConfirm = function (ev) {
         var confirm = $mdDialog.confirm()

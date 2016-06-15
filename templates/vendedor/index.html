@@ -49,7 +49,7 @@
                 </tr>
                 </thead>
                 <tbody md-body>
-                <tr md-row md-select="vendedor" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat=" vendedor in vendedores | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                <tr class="manito" md-row md-select="vendedor" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat=" vendedor in vendedores | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
                     <td md-cell>{{ vendedor.nombres }}</td>
                     <td md-cell>{{ vendedor.apellidos }}</td>
                     <td md-cell>{{ vendedor.cedula }}</td>

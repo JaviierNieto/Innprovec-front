@@ -84,7 +84,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 input[type=number] {
      -moz-appearance:textfield;
- }
+}
 
 input[type=date]::-webkit-outer-spin-button,
 input[type=date]::-webkit-inner-spin-button {
@@ -94,4 +94,11 @@ input[type=date]::-webkit-inner-spin-button {
 
 input[type=date] {
     -moz-appearance:textfield;
+}
+
+.search{
+    padding: 20px;
+}
+.search2{
+    padding: 0px 20px 20px;
 }
