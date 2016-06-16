@@ -129,8 +129,15 @@ app.controller('VentaCreateCtrl', function ($mdEditDialog, $scope, listaVenta, V
 
     };
 
+    function fechas(){
+        try{
+            $scope.venta.fecha = $scope.venta.fecha.getFullYear()+"-"+($scope.venta.fecha.getMonth() + 1)+"-"+$scope.venta.fecha.getDate()
+        }catch (e){console.log(e)}
+    }
+
     $scope.guardar = function () {
         $scope.crear_venta();
+        fechas()
         if ($scope.validado()) {
             listaVenta.save($scope.venta, function (data) {
                 Toast.Mensaje('Venta Creada');
